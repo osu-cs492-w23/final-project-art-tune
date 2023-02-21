@@ -40,6 +40,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
 
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -47,7 +48,6 @@ dependencies {
     implementation 'com.squareup.moshi:moshi:1.14.0'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
