@@ -1,0 +1,3 @@
+# GitHub Search with Settings
+
+In this project, we'll add application settings to our GitHub search app using the [AndroidX Preference Library](https://developer.android.com/guide/topics/ui/settings/).  To work with this project, you can clone it from GitHub onto your development machine and then import it into Android Studio using File → New → Import...
