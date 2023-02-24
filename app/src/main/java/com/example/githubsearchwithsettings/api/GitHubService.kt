@@ -29,7 +29,7 @@ interface GitHubService {
     @GET("search/repositories")
     suspend fun searchRepositories(
         @Query("q") query: String,
-        @Query("sort") sort: String = "stars"
+        @Query("sort") sort: String? = "stars"
     ) : Response<GitHubSearchResults>
 
     companion object {

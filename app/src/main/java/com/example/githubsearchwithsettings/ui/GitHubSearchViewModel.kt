@@ -60,11 +60,17 @@ class GitHubSearchViewModel: ViewModel() {
      *
      * @param query The search query term to send to the GitHub API.
      */
-    fun loadSearchResults(query: String) {
+    fun loadSearchResults(
+        query: String,
+        sort: String?,
+        user: String?,
+        languages: Set<String>?,
+        firstIssues: Int
+    ) {
         viewModelScope.launch {
             _loadingStatus.value = LoadingStatus.LOADING
             _errorMessage.value = null
-            val result = repository.loadRepositoriesSearch(query)
+            val result = repository.loadRepositoriesSearch(query, sort, user, languages, firstIssues)
             _loadingStatus.value = when (result.isSuccess) {
                 true -> LoadingStatus.SUCCESS
                 false -> LoadingStatus.ERROR

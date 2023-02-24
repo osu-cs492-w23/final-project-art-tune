@@ -25,10 +25,19 @@ class GitHubReposRepository(
      *   Exception associated with the Result object will provide more info about why the query
      *   failed.
      */
-    suspend fun loadRepositoriesSearch(query: String): Result<List<GitHubRepo>> =
+    suspend fun loadRepositoriesSearch(
+        query: String,
+        sort: String?,
+        user: String?,
+        languages: Set<String>?,
+        firstIssues: Int
+    ): Result<List<GitHubRepo>> =
         withContext(dispatcher) {
             try {
-                val response = service.searchRepositories(query)
+                val response = service.searchRepositories(
+                    buildGitHubQuery(query, user, languages, firstIssues),
+                    sort
+                )
                 if (response.isSuccessful) {
                     Result.success(response.body()?.items ?: listOf())
                 } else {
