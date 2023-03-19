@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/pref_category_search">
+        <ListPreference
+            android:key="@string/pref_sort_key"
+            android:title="@string/pref_sort_title"
+            android:entries="@array/pref_sort_entries"
+            android:entryValues="@array/pref_sort_values"
+            android:defaultValue="@string/pref_sort_default"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:key="@string/pref_user_key"
+            android:title="@string/pref_user_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <MultiSelectListPreference
+            android:key="@string/pref_language_key"
+            android:title="@string/pref_language_title"
+            android:dialogTitle="@string/pref_language_title"
+            android:entries="@array/pref_language_entries"
+            android:entryValues="@array/pref_language_values" />
+
+        <SeekBarPreference
+            android:key="@string/pref_first_issues_key"
+            android:title="@string/pref_first_issues_title"
+            android:max="8"
+            app:showSeekBarValue="true" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
