@@ -1,4 +1,4 @@
-package com.example.githubsearchwithsettings
+package com.example.arttune
 
 import org.junit.Test
 

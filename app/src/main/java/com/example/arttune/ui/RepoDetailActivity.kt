@@ -1,4 +1,4 @@
-package com.example.githubsearchwithsettings.ui
+package com.example.arttune.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -8,14 +8,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import com.example.githubsearchwithsettings.R
-import com.example.githubsearchwithsettings.data.GitHubRepo
+import com.example.arttune.R
+import com.example.arttune.data.SpotifyTrack
 import com.google.android.material.snackbar.Snackbar
 
 const val EXTRA_GITHUB_REPO = "GITHUB_REPO"
 
 class RepoDetailActivity : AppCompatActivity() {
-    private var repo: GitHubRepo? = null
+    private var repo: SpotifyTrack? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class RepoDetailActivity : AppCompatActivity() {
          * GitHub repo, use that information to populate the UI.
          */
         if (intent != null && intent.hasExtra(EXTRA_GITHUB_REPO)) {
-            repo = intent.getSerializableExtra(EXTRA_GITHUB_REPO) as GitHubRepo
+            repo = intent.getSerializableExtra(EXTRA_GITHUB_REPO) as SpotifyTrack
 
             findViewById<TextView>(R.id.tv_repo_name).text = repo!!.name
             findViewById<TextView>(R.id.tv_repo_stars).text = repo!!.stars.toString()

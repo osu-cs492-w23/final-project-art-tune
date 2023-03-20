@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.githubsearchwithsettings'
+    namespace 'com.example.arttune'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.githubsearchwithsettings"
+        applicationId "com.example.arttune"
         minSdk 24
         targetSdk 33
         versionCode 1
