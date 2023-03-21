@@ -13,7 +13,8 @@ An app that generates art images from certain songs!
 
 ## Contributors
 
-**Andrea Tongsak**
+**Andrea Tongsak**, *Lover by Taylor Swift*
+
 
 **Avery Mao**
 
