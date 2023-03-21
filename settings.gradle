@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "GitHub Search with Settings"
+rootProject.name = "art tune"
 include ':app'

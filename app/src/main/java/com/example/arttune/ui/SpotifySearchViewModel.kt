@@ -7,13 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.arttune.api.SpotifyService
 import com.example.arttune.data.LoadingStatus
 import com.example.arttune.data.SpotifyTrack
+import com.example.arttune.data.SpotifyTrackItemsJson
 import com.example.arttune.data.SpotifyTracksRepository
 import kotlinx.coroutines.launch
 
 class SpotifySearchViewModel : ViewModel() {
     private val repository = SpotifyTracksRepository(SpotifyService.create())
-    private val _searchResults = MutableLiveData<List<SpotifyTrack>?>(null)
-    val searchResults: LiveData<List<SpotifyTrack>?> = _searchResults
+    private val _searchResults = MutableLiveData<List<SpotifyTrackItemsJson>?>(null)
+    val searchResults: LiveData<List<SpotifyTrackItemsJson>?> = _searchResults
 
     private val _loadingStatus = MutableLiveData<LoadingStatus>(LoadingStatus.SUCCESS)
     val loadingStatus: LiveData<LoadingStatus> = _loadingStatus
