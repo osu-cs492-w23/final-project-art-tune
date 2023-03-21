@@ -10,6 +10,7 @@ import com.example.githubsearchwithsettings.R
 import com.google.android.material.progressindicator.CircularProgressIndicator
 
 const val SPOTIFY_KEY = "9f02ab55a6bb4fdc8ab0e42a6208574a"
+const val ART_KEY = ""
 
 class MainActivity : AppCompatActivity() {
     private val tag = "MainActivity"
