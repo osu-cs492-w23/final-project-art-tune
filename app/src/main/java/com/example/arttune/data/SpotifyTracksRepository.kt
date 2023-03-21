@@ -9,12 +9,12 @@ class SpotifyTracksRepository (
     private val service: SpotifyService,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun loadTracksSearch(q: String) : Result<List<SpotifyTrackJson>> =
+    suspend fun loadTracksSearch(q: String) : Result<List<SpotifyTrackItemsJson>> =
         withContext(dispatcher) {
             try {
                 val response = service.searchTrack(q)
                 if (response.isSuccessful) {
-                    Result.success(response.body()?.tracks ?: listOf())
+                    Result.success(response.body()?.items ?: listOf())
                 }
                 else {
                     Result.failure(Exception(response.errorBody()?.string()))

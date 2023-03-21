@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.data.SpotifyTrack
-import com.example.githubsearchwithsettings.R
+import com.example.arttune.R
 
 class TrackAdapter : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     val tracks: MutableList<SpotifyTrack> = mutableListOf()
