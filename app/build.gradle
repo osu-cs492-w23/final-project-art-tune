@@ -49,6 +49,8 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
+    implementation("com.adamratzman:spotify-api-kotlin-core:3.8.5")
+
     ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     testImplementation 'junit:junit:4.13.2'

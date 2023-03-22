@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GitHubSearch"
+        android:theme="@style/Theme.ArtTune"
         tools:targetApi="31">
 <!--        <activity-->
 <!--            android:name=".ui.SettingsActivity"-->
@@ -21,6 +21,10 @@
 <!--            android:name=".ui.RepoDetailActivity"-->
 <!--            android:exported="false"-->
 <!--            android:parentActivityName=".ui.MainActivity" />-->
+        <activity
+            android:name=".ui.GalleryActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.MainActivity"/>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
