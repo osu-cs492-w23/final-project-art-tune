@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,10 +19,9 @@
             app:layout_constraintBottom_toTopOf="@id/tv_song_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/mona_lisa"/>
+            />
         <TextView
             android:id="@+id/tv_song_name"
-            android:text="On Gp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/iv_saved_art"
@@ -30,7 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"/>
         <TextView
             android:id="@+id/tv_artist_name"
-            android:text="Death Grips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_song_name"

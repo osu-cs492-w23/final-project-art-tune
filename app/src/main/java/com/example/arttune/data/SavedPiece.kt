@@ -1,6 +1,10 @@
 package com.example.arttune.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class SavedPiece(
-    val songName: String,
-    val artist: String
+    @PrimaryKey val songArtist: List<String>,
+    val imgUrl: String
 )
