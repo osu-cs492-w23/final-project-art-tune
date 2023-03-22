@@ -16,24 +16,24 @@
             android:id="@+id/iv_saved_art"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_song_name"
+            app:layout_constraintBottom_toTopOf="@id/tv_gallery_track_title"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/mona_lisa"/>
         <TextView
-            android:id="@+id/tv_song_name"
+            android:id="@+id/tv_gallery_track_title"
             android:text="On Gp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/iv_saved_art"
-            app:layout_constraintBottom_toTopOf="@id/tv_artist_name"
+            app:layout_constraintBottom_toTopOf="@id/tv_gallery_artist"
             app:layout_constraintStart_toStartOf="parent"/>
         <TextView
-            android:id="@+id/tv_artist_name"
+            android:id="@+id/tv_gallery_artist"
             android:text="Death Grips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_song_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_gallery_track_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -42,9 +42,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/baseline_play_arrow_24"
-            app:layout_constraintTop_toTopOf="@id/tv_song_name"
-            app:layout_constraintBottom_toBottomOf="@id/tv_song_name"
-            app:layout_constraintStart_toEndOf="@id/tv_song_name"/>
+            app:layout_constraintTop_toTopOf="@id/tv_gallery_track_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_gallery_track_title"
+            app:layout_constraintStart_toEndOf="@id/tv_gallery_track_title"
+            android:contentDescription="@string/play_button" />
 
         <ImageView
             android:id="@+id/iv_save_button"
@@ -54,7 +55,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/iv_share_button"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            android:contentDescription="@string/save_button" />
+
         <ImageView
             android:id="@+id/iv_share_button"
             android:layout_width="50dp"
@@ -63,7 +66,8 @@
             app:layout_constraintTop_toBottomOf="@id/iv_save_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            android:contentDescription="@string/share_button" />
         
 
     </androidx.constraintlayout.widget.ConstraintLayout>

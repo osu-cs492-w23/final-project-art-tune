@@ -12,10 +12,12 @@ class SpotifyTracksRepository (
     private val service: SpotifyService,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend fun loadTracksSearch(q: String) : Result<List<SpotifyTrackItemsJson>> =
+    suspend fun loadTracksSearch(q: String, key: String) : Result<List<SpotifyTrack>> =
         withContext(dispatcher) {
+            Log.v("repo","query: $q")
+
             try {
-                val response = service.searchTrack(q)
+                val response = service.searchTrack(q, "track")
                 if (response.isSuccessful) {
                     Result.success(response.body()?.items ?: listOf())
                 }
@@ -26,12 +28,21 @@ class SpotifyTracksRepository (
                 Result.failure(e)
             }
         }
+
     suspend fun connectToApi(): SearchApi {
         val api = spotifyAppApi("bd492cb109694c66bff3018f3d83254e", "9f02ab55a6bb4fdc8ab0e42a6208574a").build() // create and build api
         val search = api.search
 
         return search
 
+    }
 
+
+
+    private fun buildSpotifyQuery(query: String, type: String) : String {
+        var full = query
+        full += type
+        return full
     }
 }
+

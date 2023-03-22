@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
 
-class TrackAdapter : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
-    val tracks: MutableList<SpotifyTrack> = mutableListOf()
+class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
+    private var tracks = listOf<SpotifyTrack>()
 
     override fun getItemCount() = tracks.size
 
-    fun addTrack(track: SpotifyTrack) {
-        tracks.add(0,track)
-        notifyItemInserted(0)
+    fun updateTrackList(newList: List<SpotifyTrack>?) {
+        tracks = newList ?: listOf()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
@@ -29,12 +29,16 @@ class TrackAdapter : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     }
 
     class TrackViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        private val nameTV = view.findViewById<TextView>(R.id.tv_track_title)
         private var currentTrack: SpotifyTrack? = null
+        private val nameTV = view.findViewById<TextView>(R.id.tv_track_title)
+        private val artistTV = view.findViewById<TextView>(R.id.tv_track_title)
+        private val lengthTV = view.findViewById<TextView>(R.id.tv_track_length)
 
         fun bind(track: SpotifyTrack) {
             currentTrack = track
             nameTV.text = track.trackTitle
+            artistTV.text = track.artists
+            lengthTV.text = track.length.toString()
         }
     }
 }

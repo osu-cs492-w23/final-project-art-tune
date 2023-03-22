@@ -19,25 +19,26 @@ import kotlinx.coroutines.launch
 
 class SpotifySearchViewModel : ViewModel() {
     private val repository = SpotifyTracksRepository(SpotifyService.create())
-    private val _searchResults = MutableLiveData<List<SpotifyTrackItemsJson>?>(null)
-    val searchResults: LiveData<List<SpotifyTrackItemsJson>?> = _searchResults
+    private val _searchResults = MutableLiveData<List<SpotifyTrack>?>(null)
+    val searchResults: LiveData<List<SpotifyTrack>?> = _searchResults
 
     private val _loadingStatus = MutableLiveData<LoadingStatus>(LoadingStatus.SUCCESS)
     val loadingStatus: LiveData<LoadingStatus> = _loadingStatus
     private val _errorMessage = MutableLiveData<String?>(null)
     val errorMessage: LiveData<String?> = _errorMessage
 
+
     private var _apiResult : MutableList<List<String>> = mutableListOf(listOf())
     val apiResult : MutableList<List<String>> = _apiResult
 
     var searchApi : SearchApi? = null
 
-    fun loadSearch(q: String) {
+    fun loadSearch(q: String, key: String) {
         viewModelScope.launch {
             _loadingStatus.value = LoadingStatus.LOADING
             _errorMessage.value = null
-            val result = repository.loadTracksSearch(q)
-            val otherResult = searchApi?.searchTrack(q,5)
+            Log.v("vm","query: $q")
+            val result = repository.loadTracksSearch(q, key)
             _loadingStatus.value = when (result.isSuccess) {
                 true -> LoadingStatus.SUCCESS
                 false -> LoadingStatus.ERROR
