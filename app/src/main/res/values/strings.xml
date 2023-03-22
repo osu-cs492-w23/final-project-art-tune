@@ -14,5 +14,5 @@
     <string name="action_view_on_web_error">There\'s no app on this device that can open a web page.  Try installing a web browser.</string>
 
     <string name="action_settings">Settings</string>
-
+    <string name="action_gallery">Gallery</string>
 </resources>

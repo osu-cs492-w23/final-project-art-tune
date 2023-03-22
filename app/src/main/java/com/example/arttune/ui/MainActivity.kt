@@ -1,7 +1,10 @@
 package com.example.arttune.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val temp = artSearchViewModel.loadSearch("cat")
         artSearchViewModel.loadInfo("656")
 
+
     }
     override fun onResume() {
         super.onResume()
@@ -43,5 +47,19 @@ class MainActivity : AppCompatActivity() {
          */
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.action_gallery -> {
+                val intent = Intent(this, GalleryActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else ->super.onOptionsItemSelected(item)
+        }
+    }
 }
