@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Art Tune</string>
 
-    <string name="search_hint">Search Spotify…</string>
+    <string name="search_hint">Search for a song…</string>
     <string name="search">Search</string>
+    <string name="randomize">Random Song</string>
 
     <string name="search_error">Error fetching search results: %1$s</string>
 
@@ -13,4 +14,5 @@
     <string name="action_view_on_web_error">There\'s no app on this device that can open a web page.  Try installing a web browser.</string>
 
     <string name="action_settings">Settings</string>
+
 </resources>

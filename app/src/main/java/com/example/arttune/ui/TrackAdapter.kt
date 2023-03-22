@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.arttune.data.SpotifyTrack
 import com.example.arttune.R
+import com.example.arttune.data.SpotifyTrack
 
 class TrackAdapter : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     val tracks: MutableList<SpotifyTrack> = mutableListOf()
@@ -21,7 +20,7 @@ class TrackAdapter : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.spotify_track_item, parent, false)
+            .inflate(R.layout.spotify_track_list_item, parent, false)
         return TrackViewHolder(itemView)
     }
 

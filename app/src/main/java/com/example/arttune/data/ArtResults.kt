@@ -8,8 +8,6 @@ data class ArtResults (
     @Json(name = "data") val artPieces: List<ArtPiece>,
 )
 
-
-
 @JsonClass(generateAdapter = true)
 data class ArtPiece (
     val id: Int,

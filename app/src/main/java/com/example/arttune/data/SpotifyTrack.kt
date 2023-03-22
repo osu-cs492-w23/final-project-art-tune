@@ -9,6 +9,7 @@ data class SpotifyTrack(
     val artists: List<ArtistJson>,
     val genre: String,
     val releaseDate: String,
+    val length: Int,
     val id: String,
     val trackTitle: String
 ) : java.io.Serializable
@@ -17,6 +18,7 @@ data class SpotifyTrack(
 data class SpotifyTrackItemsJson(
     val album: AlbumJson,
     val artists: ArtistListJson,
+    val duration_ms: Int,
     val id: String,
     val name: String
 )
@@ -48,8 +50,7 @@ class SpotifyJsonAdapter {
         genre = track.album.genres[0],
         releaseDate = track.album.release_date,
         id = track.id,
-        trackTitle = track.name
+        trackTitle = track.name,
+        length = track.duration_ms / 1000
     )
-
-
 }
