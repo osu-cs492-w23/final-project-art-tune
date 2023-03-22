@@ -40,6 +40,5 @@ class GalleryActivity: AppCompatActivity() {
         viewModel.savedPieces.observe(this){savedPieces ->
             galleryAdapter.updateGallery(savedPieces)
         }
-
     }
 }

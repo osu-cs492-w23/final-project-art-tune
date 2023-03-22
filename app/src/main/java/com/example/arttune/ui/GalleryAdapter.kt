@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
@@ -39,20 +40,13 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         private val songName: TextView = itemView.findViewById(R.id.tv_song_name)
         private val artistName: TextView = itemView.findViewById(R.id.tv_artist_name)
         private val art: ImageView = itemView.findViewById(R.id.iv_saved_art)
-        private val saveButton: ImageView = itemView.findViewById(R.id.iv_save_button)
+        private val saveButton: CheckBox = itemView.findViewById(R.id.iv_save_button)
 
-        init {
-            saveButton.setOnClickListener{
-                saveButton.setImageDrawable(
-                    AppCompatResources.getDrawable(
-                        itemView.context,
-                        R.drawable.ic_action_bookmark_off
-                    )
-                )
-//                checkedOff = false
-//                findPiece()
-            }
-        }
+//        init {
+//            saveButton.setOnCheckedChangeListener{
+//                _,isChecked->
+//            }
+//        }
 
         fun bind(savedPiece: SavedPiece){
             val ctx = itemView.context
@@ -60,14 +54,5 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
             artistName.text = savedPiece.artist
             Glide.with(ctx).load(savedPiece.imgUrl).into(art)
         }
-//        fun findPiece(){
-//            val icon = saveButton.drawable
-//            val drawa = AppCompatResources.getDrawable(
-//                itemView.context,
-//                R.drawable.ic_action_bookmark_off
-//            )
-//            //if(icon.equals(R.drawable.ic_action_bookmark_off))
-//                Log.e("Debug", "Icon: $icon draw: $drawa")
-//        }
     }
 }
