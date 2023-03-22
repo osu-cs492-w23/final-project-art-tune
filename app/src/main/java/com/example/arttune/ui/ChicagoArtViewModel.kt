@@ -1,5 +1,6 @@
 package com.example.arttune.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,9 @@ class ChicagoArtViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>(null)
     val errorMessage: LiveData<String?> = _errorMessage
 
+    private val _artInfo = MutableLiveData<ArtWorkInfo>(null)
+    val artInfo: LiveData<ArtWorkInfo> = _artInfo
+
     fun loadSearch(q: String) {
         viewModelScope.launch {
             _loadingStatus.value = LoadingStatus.LOADING
@@ -30,6 +34,14 @@ class ChicagoArtViewModel : ViewModel() {
             }
             _searchResults.value = result.getOrNull()
             _errorMessage.value = result.exceptionOrNull()?.message
+        }
+    }
+
+    fun loadInfo(q: String){
+        viewModelScope.launch {
+            val result = repository.loadArtInfo(q)
+            Log.d("viewmodel", "result : $result")
+            _artInfo.value = result.getOrNull()
         }
     }
 }

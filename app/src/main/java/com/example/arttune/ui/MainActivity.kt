@@ -24,12 +24,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val temp = artSearchViewModel.loadSearch("cat")
 
-        Log.d("Main","Temp is: ${artSearchViewModel.searchResults.value}")
+        // THESE ARE FOR TESTING DELETE LATER
+        val temp = artSearchViewModel.loadSearch("cat")
+        artSearchViewModel.loadInfo("656")
+
     }
     override fun onResume() {
         super.onResume()
+
+        // FOR TESTING DELETE LATER
+        val temp = artSearchViewModel.loadSearch("cat")
+        artSearchViewModel.loadInfo("656")
+        Log.d("Main","Temp is: ${artSearchViewModel.searchResults.value}")
+        Log.d("Main", "ART INFO IS:  ${artSearchViewModel.artInfo.value}")
         /*
          * Read preferences here...
          */
