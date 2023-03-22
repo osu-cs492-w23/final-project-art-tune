@@ -22,7 +22,8 @@ class GalleryActivity: AppCompatActivity() {
         galleryRV = findViewById(R.id.rv_gallery_list)
         galleryRV.layoutManager = LinearLayoutManager(this)
         galleryRV.setHasFixedSize(true)
-        galleryRV.adapter =galleryAdapter
+        galleryRV.adapter = galleryAdapter
+        galleryAdapter.getViewModel(viewModel)
 
         val entry1 = SavedPiece(
             "In the Aeroplane Over the Sea", "Neutral Milk Hotel",

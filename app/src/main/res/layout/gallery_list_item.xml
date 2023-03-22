@@ -48,7 +48,7 @@
             android:id="@+id/iv_save_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_action_bookmarks"
+            app:srcCompat="@drawable/ic_action_bookmark_on"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/iv_share_button"
             app:layout_constraintEnd_toEndOf="parent"
