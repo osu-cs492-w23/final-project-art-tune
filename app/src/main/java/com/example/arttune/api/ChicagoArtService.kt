@@ -14,7 +14,7 @@ interface ChicagoArtService {
     ) : Response<ArtResults>
 
     companion object {
-        private const val BASE_URL = "https://api.artic.edu/api/v1/artworks"
+        private const val BASE_URL = "https://api.artic.edu/api/v1/artworks/"
         fun create() : ChicagoArtService {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
