@@ -1,18 +1,19 @@
 package com.example.arttune.data
 
 import com.squareup.moshi.FromJson
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.squareup.moshi.ToJson
+import java.io.Serializable
 
 data class SpotifyTrack(
     val album: String,
-    val artists: List<ArtistJson>,
+    val artists: String,
     val genre: String,
     val releaseDate: String,
     val length: Int,
     val id: String,
     val trackTitle: String
-) : java.io.Serializable
+) : Serializable
 
 @JsonClass(generateAdapter = true)
 data class SpotifyTrackItemsJson(
@@ -46,11 +47,16 @@ class SpotifyJsonAdapter {
     @FromJson
     fun SpotifyTrackFromJson(track: SpotifyTrackItemsJson) = SpotifyTrack(
         album = track.album.name,
-        artists = track.artists.items,
+        artists = track.artists.items[0].name,
         genre = track.album.genres[0],
         releaseDate = track.album.release_date,
         id = track.id,
         trackTitle = track.name,
         length = track.duration_ms / 1000
     )
+
+    @ToJson
+    fun SpotifyTrackToJson(track: SpotifyTrackItemsJson): String {
+        throw UnsupportedOperationException("encoding SpotifyTrack to JSON is not supported")
+    }
 }

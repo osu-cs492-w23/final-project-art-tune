@@ -5,6 +5,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class TrackResults(
-    val items: List<SpotifyTrackItemsJson>,
+    val items: List<SpotifyTrack>,
     val href: String
 )

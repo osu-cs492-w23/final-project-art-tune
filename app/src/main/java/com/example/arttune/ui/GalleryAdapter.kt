@@ -26,8 +26,8 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        private val songName: TextView = itemView.findViewById(R.id.tv_song_name)
-        private val artistName: TextView = itemView.findViewById(R.id.tv_artist_name)
+        private val songName: TextView = itemView.findViewById(R.id.tv_gallery_track_title)
+        private val artistName: TextView = itemView.findViewById(R.id.tv_gallery_artist)
 
         fun bind(savedPiece: SavedPiece){
             songName.text = savedPiece.songName
