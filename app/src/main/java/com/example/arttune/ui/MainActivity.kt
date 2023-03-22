@@ -12,6 +12,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.adamratzman.spotify.spotifyAppApi
+import com.example.arttune.api.SpotifyService
 import com.example.arttune.R
 
 const val SPOTIFY_KEY = "9f02ab55a6bb4fdc8ab0e42a6208574a"
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val artSearchViewModel : ChicagoArtViewModel by viewModels()
     private val trackListAdapter = TrackAdapter()
     private lateinit var searchResultsListRV: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         // THESE ARE FOR TESTING DELETE LATER
         val temp = artSearchViewModel.loadSearch("cat")
         artSearchViewModel.loadInfo("656")
-
+        spotifySearchViewModel.connect()
 
     }
     override fun onResume() {
@@ -63,8 +66,18 @@ class MainActivity : AppCompatActivity() {
         // FOR TESTING DELETE LATER
         val temp = artSearchViewModel.loadSearch("cat")
         artSearchViewModel.loadInfo("656")
+
         Log.d("Main","Temp is: ${artSearchViewModel.searchResults.value}")
         Log.d("Main", "ART INFO IS:  ${artSearchViewModel.artInfo.value}")
+
+
+        // WORKS, SOMETIMES IS LATE TO GET RESULTS
+        val temp1 = spotifySearchViewModel.getTracks("lover")
+        Log.d("Main", "SEARCH SPOTIFY API RESULT : ${temp1}")
+
+        /*
+         * Read preferences here...
+         */
 
     }
 
@@ -72,6 +85,8 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.activity_main, menu)
         return true
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
