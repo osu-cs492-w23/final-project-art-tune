@@ -1,5 +1,8 @@
 package com.example.arttune.data
 
+import android.util.Log
+import com.adamratzman.spotify.endpoints.pub.SearchApi
+import com.adamratzman.spotify.spotifyAppApi
 import com.example.arttune.api.SpotifyService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -23,4 +26,12 @@ class SpotifyTracksRepository (
                 Result.failure(e)
             }
         }
+    suspend fun connectToApi(): SearchApi {
+        val api = spotifyAppApi("bd492cb109694c66bff3018f3d83254e", "9f02ab55a6bb4fdc8ab0e42a6208574a").build() // create and build api
+        val search = api.search
+
+        return search
+
+
+    }
 }
