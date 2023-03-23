@@ -44,16 +44,13 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_song_name"
             app:layout_constraintStart_toEndOf="@id/tv_song_name"/>
 
-        <CheckBox
+        <ImageView
             android:id="@+id/iv_save_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:button="@drawable/ic_action_bookmark_on"
-            android:checked="true"
-            android:scaleX="2"
-            android:scaleY="2"
-            app:layout_constraintBottom_toBottomOf="@id/iv_share_button"
+            app:srcCompat="@drawable/ic_action_bookmark_on"
+            app:layout_constraintBottom_toTopOf="@id/iv_share_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <ImageView

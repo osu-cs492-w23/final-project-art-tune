@@ -58,7 +58,7 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         private val songName: TextView = itemView.findViewById(R.id.tv_song_name)
         private val artistName: TextView = itemView.findViewById(R.id.tv_artist_name)
         private val art: ImageView = itemView.findViewById(R.id.iv_saved_art)
-        val saveButton: CheckBox = itemView.findViewById(R.id.iv_save_button)
+        val saveButton: ImageView = itemView.findViewById(R.id.iv_save_button)
 
         fun bind(savedPiece: SavedPiece){
             val ctx = itemView.context
