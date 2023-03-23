@@ -2,21 +2,16 @@ package com.example.arttune.ui
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.util.Log
 import com.bumptech.glide.Glide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
-import java.net.URL
 
 class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     private var viewModel: SavedPiecesViewModel? = null
@@ -74,11 +69,14 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
         fun bind(savedPiece: SavedPiece){
             songName.text = savedPiece.songName
-            artistName.text = savedPiece.artist
+            artistName.text = savedPiece.songArtist
             Glide.with(ctx).load(savedPiece.imgUrl).into(art)
         }
         fun shareSavedPiece(savedPiece: SavedPiece){
-            val shareText = "${savedPiece.songName}\n ${savedPiece.artist}"
+            val shareText = "Song: ${savedPiece.songName}\n " +
+                    "Song Artist: ${savedPiece.songArtist}\n" +
+                    "Art name: ${savedPiece.artName}\n" +
+                    "Artist Name: ${savedPiece.artArtist}"
             //val uri = Uri.parse(savedPiece.imgUrl)
 
             val intent = Intent().apply {

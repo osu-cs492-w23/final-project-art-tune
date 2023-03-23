@@ -27,10 +27,13 @@ class GalleryActivity: AppCompatActivity() {
 
         val entry1 = SavedPiece(
             "In the Aeroplane Over the Sea", "Neutral Milk Hotel",
+            "Postcard", "Chris Bilheimer",
             "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/ItAotS_postcard_origins.jpg/200px-ItAotS_postcard_origins.jpg"
         )
         val entry2 = SavedPiece(
             "Walkin", "Denzel Curry",
+            "Young girl in a white dress walking on Skagen Sønderstrand",
+            "Michael Peter Ancher",
             "https://i.pinimg.com/originals/56/fe/97/56fe9724beef7c3e15f9b88928d18e3f.jpg"
         )
         viewModel.addSavedPiece(entry1)

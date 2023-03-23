@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class SavedPiece(
     @PrimaryKey val songName: String,
-    val artist: String,
+    val songArtist: String,
+    val artName: String,
+    val artArtist: String,
     val imgUrl: String
 )
