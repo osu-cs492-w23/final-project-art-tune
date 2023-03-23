@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
 
 const val SPOTIFY_KEY = "9f02ab55a6bb4fdc8ab0e42a6208574a"
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val tag = "MainActivity"
     private val spotifySearchViewModel: SpotifySearchViewModel by viewModels()
     private val artSearchViewModel : ChicagoArtViewModel by viewModels()
-    private val trackListAdapter = TrackAdapter()
+    private val trackListAdapter = TrackAdapter(::onTrackClick)
     private lateinit var searchResultsListRV: RecyclerView
 
 
@@ -78,18 +79,18 @@ class MainActivity : AppCompatActivity() {
         val temp1 = spotifySearchViewModel.getTracks("lover")
         Log.d("Main", "SEARCH SPOTIFY API RESULT : ${temp1}")
 
-        /*
-         * Read preferences here...
-         */
+    }
 
+    private fun onTrackClick(track: Track) {
+        val intent = Intent(this, TrackDetailActivity::class.java)
+        //intent.putExtra(EXTRA_TRACK, track)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_main, menu)
         return true
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
