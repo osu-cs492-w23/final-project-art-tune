@@ -25,22 +25,18 @@ class SpotifySearchViewModel : ViewModel() {
     private val _searchResults = MutableLiveData<List<SpotifyTrack>?>(null)
     val searchResults: LiveData<List<SpotifyTrack>?> = _searchResults
 
-    private val _trackResults = MutableLiveData<List<Track>?>(null)
-    val trackResults: LiveData<List<Track>?> = _trackResults
+    private val _trackResults = MutableLiveData<PagingObject<Track>?>(null)
+    val trackResults: LiveData<PagingObject<Track>?> = _trackResults
 
     private val _loadingStatus = MutableLiveData<LoadingStatus>(LoadingStatus.SUCCESS)
     val loadingStatus: LiveData<LoadingStatus> = _loadingStatus
     private val _errorMessage = MutableLiveData<String?>(null)
     val errorMessage: LiveData<String?> = _errorMessage
 
-    // private var search = SpotifySearchResult
-
     private var _apiResult : MutableList<List<String>> = mutableListOf(listOf())
     val apiResult : MutableList<List<String>> = _apiResult
 
     var searchApi : SearchApi? = null
-
-    // private val genericSpotifyApi : GenericSpotifyApi?
 
     fun loadSearch(q: String, key: String) {
         viewModelScope.launch {
@@ -48,9 +44,13 @@ class SpotifySearchViewModel : ViewModel() {
             _errorMessage.value = null
 
             Log.v("vm","query: $q")
-            Log.d("idk", "search: ${searchApi?.searchTrack(q)?.items}")
+            // Log.d("idk", "search: ${searchApi?.searchTrack(q)?.items}")
             // val result = repository.loadTracksSearch(q, key)
-            val result = searchApi?.searchTrack(q)?.items
+            // val result = searchApi?.searchTrack(q)?.items
+            val result = searchApi?.searchTrack(q, 5)
+            Log.v("result before", "$result")
+            cleanSpotifyResults(result)
+            Log.v("result after", "$result")
             _loadingStatus.value = when (result.isNullOrEmpty()) {
                 false -> LoadingStatus.SUCCESS
                 true -> LoadingStatus.ERROR
@@ -68,8 +68,8 @@ class SpotifySearchViewModel : ViewModel() {
             var characters = "abcdefghijklmnopqrstuvwxyz"
             var randomCharacter = characters.get(floor(Math.random() * characters.length).toInt())
             var randomTerm = randomCharacter.toString()
-            val result = searchApi?.searchTrack(randomTerm)?.items
-            Log.d("random", "search: ${searchApi?.searchTrack(randomTerm)?.items}")
+            val result = searchApi?.searchTrack(randomTerm, 5)
+            cleanSpotifyResults(result)
             _loadingStatus.value = when (result.isNullOrEmpty()) {
                 false -> LoadingStatus.SUCCESS
                 true -> LoadingStatus.ERROR
@@ -83,13 +83,13 @@ class SpotifySearchViewModel : ViewModel() {
         viewModelScope.launch {
             // get first 5 only.
             val result = searchApi?.searchTrack(q,5)
-            cleanSpotifyresults(result)
+            cleanSpotifyResults(result)
         }
         return _apiResult
     }
 
     // This function makes the spotify api results human readable
-    fun cleanSpotifyresults(result: PagingObject<Track>?){
+    fun cleanSpotifyResults(result: PagingObject<Track>?){
 
         var fullResultSet: MutableList<List<String>> = mutableListOf(listOf())
 

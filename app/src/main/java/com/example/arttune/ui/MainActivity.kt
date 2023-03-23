@@ -40,8 +40,9 @@ class MainActivity : AppCompatActivity() {
         searchResultsListRV.setHasFixedSize(true)
         searchResultsListRV.adapter = trackListAdapter
 
-        spotifySearchViewModel.searchResults.observe(this) { searchResults ->
-            trackListAdapter.updateTrackList(searchResults)
+        spotifySearchViewModel.trackResults.observe(this) { trackResults ->
+            trackListAdapter.updateTrackList(trackResults?.items)
+            Log.v("tracks", "Tracks: ${trackResults?.items?.get(1)}")
         }
 
         searchBtn.setOnClickListener {
@@ -49,8 +50,6 @@ class MainActivity : AppCompatActivity() {
             val query = searchBoxET.text.toString()
             if (!TextUtils.isEmpty(query)) {
                 spotifySearchViewModel.loadSearch(query, SPOTIFY_KEY)
-                Log.v("main2","${spotifySearchViewModel.searchResults}")
-                Log.v("main3","${spotifySearchViewModel.trackResults}")
                 searchResultsListRV.scrollToPosition(0)
             }
         }
@@ -58,8 +57,6 @@ class MainActivity : AppCompatActivity() {
         randomBtn.setOnClickListener {
             Log.v("main", "random button")
             spotifySearchViewModel.randomSearch()
-            // This is too slow to pull the correct Log value
-            Log.v("main4", "${spotifySearchViewModel.trackResults}")
             searchResultsListRV.scrollToPosition(0)
         }
 
@@ -77,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         artSearchViewModel.loadInfo("656")
 
         Log.d("Main","Temp is: ${artSearchViewModel.searchResults.value}")
-        Log.d("Main", "ART INFO IS:  ${artSearchViewModel.artInfo.value}")
+        Log.d("Main", "ART INFO IS: ${artSearchViewModel.artInfo.value}")
 
 
         // WORKS, SOMETIMES IS LATE TO GET RESULTS

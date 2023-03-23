@@ -16,13 +16,11 @@ class LandingActivity : AppCompatActivity() {
         val galleryBtn: Button = findViewById(R.id.gallery_button)
 
         masterpieceBtn.setOnClickListener {
-            Log.v("landing", "masterpiece btn")
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
         galleryBtn.setOnClickListener {
-            Log.v("landing", "gallery btn")
             val intent = Intent(this, GalleryActivity::class.java)
             startActivity(intent)
         }
