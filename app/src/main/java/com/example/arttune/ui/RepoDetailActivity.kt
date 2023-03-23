@@ -22,7 +22,7 @@ class RepoDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.spotify_track_detail)
 
-        mediaPlayer = MediaPlayer.create(this,"TODO: URI or https to stream media from")
+        //mediaPlayer = MediaPlayer.create(this,"TODO: URI or https to stream media from")
         playButton = findViewById(R.id.detail_play_button)
         pauseButton = findViewById(R.id.detail_seekbar)
         seekBar = findViewById(R.id.detail_seekbar)
@@ -30,13 +30,13 @@ class RepoDetailActivity : AppCompatActivity() {
         pauseButton.isEnabled = false
 
         playButton.setOnClickListener {
-            mediaPlayer.start()
+            //mediaPlayer.start()
             pauseButton.isEnabled = true
             playButton.isEnabled = false
         }
 
         pauseButton.setOnClickListener {
-            mediaPlayer.pause();
+            //mediaPlayer.pause();
             pauseButton.isEnabled = false
             playButton.isEnabled = true
         }//
