@@ -1,9 +1,11 @@
 package com.example.arttune.ui
 
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.adamratzman.spotify.models.PagingObject
@@ -36,11 +38,13 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
         private val nameTV = view.findViewById<TextView>(R.id.tv_track_title)
         private val artistTV = view.findViewById<TextView>(R.id.tv_track_artist)
         private val lengthTV = view.findViewById<TextView>(R.id.tv_track_length)
+        private val artTV = view.findViewById<ImageView>(R.id.iv_track_image)
 
         fun bind(track: Track) {
             currentTrack = track
             artistTV.text = track.artists[0].name
             nameTV.text = track.name
+            // uriTV = track.uri
 
             val timeInSeconds = (track.length/1000)
             val minutes = (timeInSeconds/60)
