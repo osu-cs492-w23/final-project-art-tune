@@ -21,4 +21,10 @@ class SavedPiecesViewModel(application: Application): AndroidViewModel(applicati
             repository.insertSavedPiece(savedPiece)
         }
     }
+
+    fun removeSavedPiece(savedPiece: SavedPiece) {
+        viewModelScope.launch {
+            repository.deleteSavedPiece(savedPiece)
+        }
+    }
 }
