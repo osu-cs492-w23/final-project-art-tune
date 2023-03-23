@@ -28,6 +28,10 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:parentActivityName=".ui.LandingActivity"/>
+        <activity
+            android:name=".ui.LandingActivity"
+            android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
