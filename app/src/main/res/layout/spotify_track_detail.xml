@@ -1,8 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
+    <TextView
+        android:id="@+id/tv_detail_header_song"
+        style="?attr/textAppearanceHeadline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Song"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_detail_track_cover"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_header_song" />
+
+    <TextView
+        android:id="@+id/tv_detail_track_title"
+        style="?attr/textAppearanceBody1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="track title"
+        app:layout_constraintLeft_toRightOf="@id/iv_detail_track_cover"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_header_song" />
+
+    <TextView
+        android:id="@+id/tv_detail_track_artist"
+        style="?attr/textAppearanceBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="track artist"
+        app:layout_constraintLeft_toRightOf="@id/iv_detail_track_cover"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_track_title" />
+
+    <TextView
+        android:id="@+id/tv_detail_track_length"
+        style="?attr/textAppearanceBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="0:00"
+        app:layout_constraintLeft_toRightOf="@id/tv_detail_track_artist"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_track_title" />
+
+    <SeekBar
+        android:id="@+id/detail_seekbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="this is a placeholder for the media player"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_track_cover" />
+
+    <LinearLayout
+        android:id="@+id/buttons_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_seekbar">
+
+        <ImageButton
+            android:id="@+id/detail_play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/baseline_play_arrow_24" />
+
+        <ImageButton
+            android:id="@+id/detail_pause_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/baseline_pause_24" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_detail_header_art"
+        style="?attr/textAppearanceHeadline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Art"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttons_wrapper" />
+
+    <ImageView
+        android:id="@+id/iv_detail_art"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_header_art" />
+
+    <TextView
+        android:id="@+id/tv_detail_art_title"
+        style="?attr/textAppearanceBody1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="name of art piece"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_art" />
+
+    <TextView
+        android:id="@+id/tv_detail_art_artist"
+        style="?attr/textAppearanceBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="artist name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_art_title" />
+
+    <TextView
+        android:id="@+id/tv_detail_art_date"
+        style="?attr/textAppearanceBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="0000"
+        app:layout_constraintLeft_toRightOf="@id/tv_detail_art_artist"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_art_title" />
+
+    <TextView
+        android:id="@+id/tv_detail_art_genre"
+        style="?attr/textAppearanceCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:text="more details"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_art_date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
