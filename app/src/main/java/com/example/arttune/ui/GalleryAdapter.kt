@@ -1,17 +1,32 @@
 package com.example.arttune.ui
 
 import android.app.AlertDialog
+import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import com.bumptech.glide.Glide
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
+import retrofit2.http.Url
+import java.io.File
+import java.io.FileOutputStream
+import java.net.URL
+import java.util.*
+import kotlin.concurrent.thread
 
 class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     private var viewModel: SavedPiecesViewModel? = null
@@ -78,20 +93,42 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
                     "Art name: ${savedPiece.artName}\n" +
                     "Artist Name: ${savedPiece.artArtist}\n" +
                     savedPiece.imgUrl
-            //val uri = Uri.parse(savedPiece.imgUrl)
+            thread {
+                val url = URL(savedPiece.imgUrl)
+                try {
+                    val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                    val rand = Random()
+                    val randNo = rand.nextInt(10000)
+                    val imgBitmapPath = MediaStore.Images.Media.insertImage(
+                        ctx.contentResolver, bitmap, "IMG:$randNo",null
+                    )
+                    val imgBitUri = Uri.parse(imgBitmapPath)
 
-            val intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, shareText)
-                type = "text/plain"
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, shareText)
+                        putExtra(Intent.EXTRA_STREAM, imgBitUri)
+                        type = "*/*"
+                    }
+                    startActivity(ctx, Intent.createChooser(intent, null), null)
+                } catch (e: Exception) {
+                    Log.e("Debug", "$e")
+                }
             }
+
+
 //            val intent = Intent().apply {
 //                action = Intent.ACTION_SEND
 //                putExtra(Intent.EXTRA_TEXT, shareText)
-//                putExtra(Intent.EXTRA_STREAM, uri)
+//                type = "text/plain"
+//            }
+//            val intent = Intent().apply {
+//                action = Intent.ACTION_SEND
+//                putExtra(Intent.EXTRA_TEXT, shareText)
+//                //putExtra(Intent.EXTRA_STREAM, art.drawable)
 //                type = "*/*"
 //            }
-            startActivity(ctx, Intent.createChooser(intent, null), null)
+//            startActivity(ctx, Intent.createChooser(intent, null), null)
         }
     }
 }
