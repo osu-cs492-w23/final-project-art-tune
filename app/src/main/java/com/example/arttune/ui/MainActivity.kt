@@ -49,9 +49,18 @@ class MainActivity : AppCompatActivity() {
             val query = searchBoxET.text.toString()
             if (!TextUtils.isEmpty(query)) {
                 spotifySearchViewModel.loadSearch(query, SPOTIFY_KEY)
-                Log.v("main","${spotifySearchViewModel.searchResults.value}")
+                Log.v("main2","${spotifySearchViewModel.searchResults}")
+                Log.v("main3","${spotifySearchViewModel.trackResults}")
                 searchResultsListRV.scrollToPosition(0)
             }
+        }
+
+        randomBtn.setOnClickListener {
+            Log.v("main", "random button")
+            spotifySearchViewModel.randomSearch()
+            // This is too slow to pull the correct Log value
+            Log.v("main4", "${spotifySearchViewModel.trackResults}")
+            searchResultsListRV.scrollToPosition(0)
         }
 
         // THESE ARE FOR TESTING DELETE LATER
