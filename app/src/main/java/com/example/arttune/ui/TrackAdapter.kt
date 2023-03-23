@@ -13,7 +13,7 @@ import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
 
-class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
+class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     private var tracks = listOf<Track>()
 
     override fun getItemCount() = tracks.size
@@ -26,20 +26,26 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.spotify_track_list_item, parent, false)
-        return TrackViewHolder(itemView)
+        return TrackViewHolder(itemView, onTrackClick)
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         holder.bind(tracks[position])
     }
 
-    class TrackViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class TrackViewHolder (view: View, private val onClick: (Track) -> Unit) : RecyclerView.ViewHolder(view) {
         private var currentTrack: Track? = null
         private val nameTV = view.findViewById<TextView>(R.id.tv_track_title)
         private val artistTV = view.findViewById<TextView>(R.id.tv_track_artist)
         private val lengthTV = view.findViewById<TextView>(R.id.tv_track_length)
         private val artTV = view.findViewById<ImageView>(R.id.iv_track_image)
         private val uriTV = view.findViewById<TextView>(R.id.link)
+
+        init {
+            view.setOnClickListener {
+                currentTrack?.let(onClick)
+            }
+        }
 
         fun bind(track: Track) {
             currentTrack = track

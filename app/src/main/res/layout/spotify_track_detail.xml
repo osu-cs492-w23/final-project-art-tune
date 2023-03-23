@@ -29,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="track title"
         app:layout_constraintLeft_toRightOf="@id/iv_detail_track_cover"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_header_song" />
 
@@ -39,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="track artist"
         app:layout_constraintLeft_toRightOf="@id/iv_detail_track_cover"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_track_title" />
 
@@ -49,7 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="0:00"
         app:layout_constraintLeft_toRightOf="@id/tv_detail_track_artist"
         app:layout_constraintTop_toBottomOf="@id/tv_detail_track_title" />
 
@@ -58,7 +55,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="this is a placeholder for the media player"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_detail_track_cover" />
 

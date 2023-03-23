@@ -1,17 +1,20 @@
 package com.example.arttune.ui
 
+import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
 
-const val EXTRA_GITHUB_REPO = "GITHUB_REPO"
+const val EXTRA_TRACK = ""
 
-class RepoDetailActivity : AppCompatActivity() {
-    private var repo: SpotifyTrack? = null
+class TrackDetailActivity : AppCompatActivity() {
+    private var track: Track? = null
 
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var playButton: ImageButton
@@ -22,9 +25,29 @@ class RepoDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.spotify_track_detail)
 
-        //mediaPlayer = MediaPlayer.create(this,"TODO: URI or https to stream media from")
+        if (intent != null && intent.hasExtra(EXTRA_TRACK)) {
+            track = intent.getSerializableExtra(EXTRA_TRACK) as Track
+
+            findViewById<TextView>(R.id.tv_detail_track_title).text = track!!.name
+            findViewById<TextView>(R.id.tv_detail_track_artist).text = track!!.artists[0].name
+            findViewById<TextView>(R.id.tv_detail_track_length).text = track!!.length.toString()
+
+        }
+
+/*        val url = track!!.previewUrl
+        mediaPlayer = MediaPlayer().apply {
+            setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .build()
+            )
+            setDataSource(url)
+            prepare() // might take long! (for buffering, etc)
+        }*/
+
         playButton = findViewById(R.id.detail_play_button)
-        pauseButton = findViewById(R.id.detail_seekbar)
+        pauseButton = findViewById(R.id.detail_pause_button)
         seekBar = findViewById(R.id.detail_seekbar)
 
         pauseButton.isEnabled = false
@@ -36,21 +59,12 @@ class RepoDetailActivity : AppCompatActivity() {
         }
 
         pauseButton.setOnClickListener {
-            //mediaPlayer.pause();
+            //mediaPlayer.pause()
             pauseButton.isEnabled = false
             playButton.isEnabled = true
-        }//
-//        /*
-//         * If an intent was used to launch this activity and it contains information about a
-//         * GitHub repo, use that information to populate the UI.
-//         */
-//        if (intent != null && intent.hasExtra(EXTRA_GITHUB_REPO)) {
-//            repo = intent.getSerializableExtra(EXTRA_GITHUB_REPO) as SpotifyTrack
-//
-//            findViewById<TextView>(R.id.tv_repo_name).text = repo!!.name
-//            findViewById<TextView>(R.id.tv_repo_stars).text = repo!!.stars.toString()
-//            findViewById<TextView>(R.id.tv_repo_description).text = repo!!.description
-//        }
+        }
+
+
     }
 //
 //    /**

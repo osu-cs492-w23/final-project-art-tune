@@ -83,8 +83,7 @@ class SpotifySearchViewModel : ViewModel() {
     }
 
     // This function makes the spotify api results human readable
-    fun cleanSpotifyResults(result: PagingObject<Track>?){
-
+    fun cleanSpotifyResults(result: PagingObject<Track>?) {
         var fullResultSet: MutableList<List<String>> = mutableListOf(listOf())
 
         if (result != null) {
