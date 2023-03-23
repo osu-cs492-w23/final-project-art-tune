@@ -3,6 +3,7 @@ package com.example.arttune.data
 import android.util.Log
 import com.adamratzman.spotify.endpoints.pub.SearchApi
 import com.adamratzman.spotify.spotifyAppApi
+import com.adamratzman.spotify.models.SpotifySearchResult
 import com.example.arttune.api.SpotifyService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -18,10 +19,13 @@ class SpotifyTracksRepository (
 
             try {
                 val response = service.searchTrack(q, "track")
+                Log.d("response finished", "hello")
                 if (response.isSuccessful) {
+                    Log.v("load success", "response: ${response.body()?.items}")
                     Result.success(response.body()?.items ?: listOf())
                 }
                 else {
+                    Log.v("load failure", "response: ${response.errorBody()}")
                     Result.failure(Exception(response.errorBody()?.string()))
                 }
             } catch (e: Exception) {

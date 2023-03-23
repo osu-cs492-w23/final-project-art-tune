@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             Log.v("main","search button")
             val query = searchBoxET.text.toString()
             if (!TextUtils.isEmpty(query)) {
-                spotifySearchViewModel.loadSearch(query)
+                spotifySearchViewModel.loadSearch(query, SPOTIFY_KEY)
                 Log.v("main","${spotifySearchViewModel.searchResults.value}")
                 searchResultsListRV.scrollToPosition(0)
             }

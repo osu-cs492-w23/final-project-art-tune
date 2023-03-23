@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.adamratzman.spotify.GenericSpotifyApi
 import com.adamratzman.spotify.SpotifyApiBuilder
 import com.adamratzman.spotify.SpotifyAppApiBuilder
 import com.adamratzman.spotify.endpoints.pub.SearchApi
 import com.adamratzman.spotify.models.PagingObject
+import com.adamratzman.spotify.models.SpotifySearchResult
 import com.adamratzman.spotify.models.Track
 import com.example.arttune.api.SpotifyService
 import com.example.arttune.data.LoadingStatus
@@ -27,17 +29,22 @@ class SpotifySearchViewModel : ViewModel() {
     private val _errorMessage = MutableLiveData<String?>(null)
     val errorMessage: LiveData<String?> = _errorMessage
 
+    // private var search = SpotifySearchResult
 
     private var _apiResult : MutableList<List<String>> = mutableListOf(listOf())
     val apiResult : MutableList<List<String>> = _apiResult
 
     var searchApi : SearchApi? = null
 
+    // private val genericSpotifyApi : GenericSpotifyApi?
+
     fun loadSearch(q: String, key: String) {
         viewModelScope.launch {
             _loadingStatus.value = LoadingStatus.LOADING
             _errorMessage.value = null
+
             Log.v("vm","query: $q")
+            Log.d("idk", "search: ${searchApi?.searchTrack(q)?.items?.first()?.name}")
             val result = repository.loadTracksSearch(q, key)
             _loadingStatus.value = when (result.isSuccess) {
                 true -> LoadingStatus.SUCCESS
