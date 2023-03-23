@@ -12,8 +12,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adamratzman.spotify.spotifyAppApi
-import com.example.arttune.api.SpotifyService
 import com.example.arttune.R
 
 const val SPOTIFY_KEY = "9f02ab55a6bb4fdc8ab0e42a6208574a"
@@ -42,14 +40,13 @@ class MainActivity : AppCompatActivity() {
 
         spotifySearchViewModel.trackResults.observe(this) { trackResults ->
             trackListAdapter.updateTrackList(trackResults?.items)
-            Log.v("tracks", "Tracks: ${trackResults?.items?.get(1)}")
         }
 
         searchBtn.setOnClickListener {
             Log.v("main","search button")
             val query = searchBoxET.text.toString()
             if (!TextUtils.isEmpty(query)) {
-                spotifySearchViewModel.loadSearch(query, SPOTIFY_KEY)
+                spotifySearchViewModel.loadSearch(query)
                 searchResultsListRV.scrollToPosition(0)
             }
         }
