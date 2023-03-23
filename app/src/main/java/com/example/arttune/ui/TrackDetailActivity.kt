@@ -1,15 +1,18 @@
 package com.example.arttune.ui
 
 import android.media.AudioAttributes
+import android.media.Image
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
+import com.bumptech.glide.Glide
 
 const val EXTRA_TRACK = ""
 
@@ -28,6 +31,11 @@ class TrackDetailActivity : AppCompatActivity() {
         setContentView(R.layout.spotify_track_detail)
 
         if (intent != null && track != null) {
+            val ctx = applicationContext
+            val coverArt = findViewById<ImageView>(R.id.iv_detail_track_cover)
+
+            Glide.with(ctx).load(track!!.album.images[0].url).into(coverArt)
+
             findViewById<TextView>(R.id.tv_detail_track_title).text = track!!.name
             findViewById<TextView>(R.id.tv_detail_track_artist).text = track!!.artists[0].name
 

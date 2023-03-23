@@ -39,9 +39,6 @@ class SpotifySearchViewModel : ViewModel() {
             _errorMessage.value = null
 
             Log.v("vm","query: $q")
-            // Log.d("idk", "search: ${searchApi?.searchTrack(q)?.items}")
-            // val result = repository.loadTracksSearch(q, key)
-            // val result = searchApi?.searchTrack(q)?.items
             val result = searchApi?.searchTrack(q, 5)
             cleanSpotifyResults(result)
             Log.v("result", "$result")
