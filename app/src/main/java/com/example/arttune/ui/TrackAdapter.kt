@@ -39,12 +39,14 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
         private val artistTV = view.findViewById<TextView>(R.id.tv_track_artist)
         private val lengthTV = view.findViewById<TextView>(R.id.tv_track_length)
         private val artTV = view.findViewById<ImageView>(R.id.iv_track_image)
+        private val uriTV = view.findViewById<TextView>(R.id.link)
 
         fun bind(track: Track) {
             currentTrack = track
             artistTV.text = track.artists[0].name
             nameTV.text = track.name
-            // uriTV = track.uri
+            uriTV.text = track.externalUrls.spotify.toString()
+
 
             val timeInSeconds = (track.length/1000)
             val minutes = (timeInSeconds/60)
@@ -52,7 +54,7 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
             val timeString = "$minutes:$remainderSeconds"
             lengthTV.text = timeString
 
-            Log.v("track info", "${nameTV.text}, ${artistTV.text}, ${lengthTV.text}")
+            Log.v("track info", "${nameTV.text}, ${artistTV.text}, ${lengthTV.text}, ${uriTV.text}")
         }
     }
 }
