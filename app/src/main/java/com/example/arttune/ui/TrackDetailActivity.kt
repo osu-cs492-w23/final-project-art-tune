@@ -34,7 +34,7 @@ class TrackDetailActivity : AppCompatActivity() {
             val timeInSeconds = (track!!.length/1000)
             val minutes = (timeInSeconds/60)
             val remainderSeconds = (timeInSeconds%60)
-            val timeString = "$minutes:$remainderSeconds"
+            val timeString = String.format("%d:%02d", minutes, remainderSeconds)
             findViewById<TextView>(R.id.tv_detail_track_length).text = timeString
         }
 

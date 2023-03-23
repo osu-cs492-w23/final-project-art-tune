@@ -59,7 +59,7 @@ class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Ada
             val timeInSeconds = (track.length/1000)
             val minutes = (timeInSeconds/60)
             val remainderSeconds = (timeInSeconds%60)
-            val timeString = "$minutes:$remainderSeconds"
+            val timeString = String.format("%d:%02d", minutes, remainderSeconds)
             lengthTV.text = timeString
 
             // Log.v("track info", "${track.album.images[0].url}, ${nameTV.text}, ${artistTV.text}, ${lengthTV.text}, ${uriTV.text}")
