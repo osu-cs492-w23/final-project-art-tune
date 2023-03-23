@@ -1,12 +1,16 @@
 package com.example.arttune.ui
 
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
+import com.spotify.sdk.android.auth.LoginActivity.REQUEST_CODE
+import java.util.jar.Manifest
 
 class GalleryActivity: AppCompatActivity() {
     private lateinit var galleryRV: RecyclerView
@@ -17,6 +21,11 @@ class GalleryActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery)
+
+        //ActivityResultContracts.RequestPermission()
+        ActivityCompat.requestPermissions(this,
+            Array(1) {android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+        REQUEST_CODE)
 
         supportActionBar?.title = "Gallery"
         galleryRV = findViewById(R.id.rv_gallery_list)
