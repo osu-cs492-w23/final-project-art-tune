@@ -12,6 +12,7 @@ import com.adamratzman.spotify.models.PagingObject
 import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
+import com.bumptech.glide.Glide
 
 class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     private var tracks = listOf<Track>()
@@ -40,6 +41,7 @@ class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Ada
         private val lengthTV = view.findViewById<TextView>(R.id.tv_track_length)
         private val artTV = view.findViewById<ImageView>(R.id.iv_track_image)
         private val uriTV = view.findViewById<TextView>(R.id.link)
+        private val ctx = view.context
 
         init {
             view.setOnClickListener {
@@ -49,10 +51,10 @@ class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Ada
 
         fun bind(track: Track) {
             currentTrack = track
+            Glide.with(ctx).load(track.album.images[0].url).into(artTV)
             artistTV.text = track.artists[0].name
             nameTV.text = track.name
             uriTV.text = track.externalUrls.spotify.toString()
-
 
             val timeInSeconds = (track.length/1000)
             val minutes = (timeInSeconds/60)
@@ -60,7 +62,7 @@ class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Ada
             val timeString = "$minutes:$remainderSeconds"
             lengthTV.text = timeString
 
-            Log.v("track info", "${nameTV.text}, ${artistTV.text}, ${lengthTV.text}, ${uriTV.text}")
+            // Log.v("track info", "${track.album.images[0].url}, ${nameTV.text}, ${artistTV.text}, ${lengthTV.text}, ${uriTV.text}")
         }
     }
 }
