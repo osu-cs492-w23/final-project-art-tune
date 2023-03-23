@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     private fun onTrackClick(track: Track) {
         val intent = Intent(this, TrackDetailActivity::class.java)
         //intent.putExtra(EXTRA_TRACK, track)
+        TrackDetailActivity.TrackObject.track = track
         startActivity(intent)
     }
 
