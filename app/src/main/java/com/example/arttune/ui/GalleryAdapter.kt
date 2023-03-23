@@ -1,12 +1,12 @@
 package com.example.arttune.ui
 
+import android.Manifest
 import android.app.AlertDialog
-import android.content.ContentResolver
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Environment
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import com.bumptech.glide.Glide
@@ -15,15 +15,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
-import retrofit2.http.Url
-import java.io.File
-import java.io.FileOutputStream
 import java.net.URL
 import java.util.*
 import kotlin.concurrent.thread
@@ -88,47 +84,52 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
             Glide.with(ctx).load(savedPiece.imgUrl).into(art)
         }
         fun shareSavedPiece(savedPiece: SavedPiece){
-            val shareText = "Song: ${savedPiece.songName}\n " +
-                    "Song Artist: ${savedPiece.songArtist}\n" +
-                    "Art name: ${savedPiece.artName}\n" +
-                    "Artist Name: ${savedPiece.artArtist}\n" +
-                    savedPiece.imgUrl
             thread {
+                Looper.prepare()
                 val url = URL(savedPiece.imgUrl)
                 try {
-                    val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    val rand = Random()
-                    val randNo = rand.nextInt(10000)
-                    val imgBitmapPath = MediaStore.Images.Media.insertImage(
-                        ctx.contentResolver, bitmap, "IMG:$randNo",null
-                    )
-                    val imgBitUri = Uri.parse(imgBitmapPath)
+                    if(ContextCompat.checkSelfPermission(
+                            ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) == PackageManager.PERMISSION_GRANTED){
+                            val shareText = "Song: ${savedPiece.songName}\n " +
+                                "Song Artist: ${savedPiece.songArtist}\n" +
+                                "Art name: ${savedPiece.artName}\n" +
+                                "Artist Name: ${savedPiece.artArtist}"
+                            val bitmap =
+                                BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                            val rand = Random()
+                            val randNo = rand.nextInt(10000)
+                            val imgBitmapPath = MediaStore.Images.Media.insertImage(
+                                ctx.contentResolver, bitmap, "IMG:$randNo", null
+                            )
+                            val imgBitUri = Uri.parse(imgBitmapPath)
 
-                    val intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, shareText)
-                        putExtra(Intent.EXTRA_STREAM, imgBitUri)
-                        type = "*/*"
+                            val intent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, shareText)
+                                putExtra(Intent.EXTRA_STREAM, imgBitUri)
+                                type = "*/*"
+                            }
+                            startActivity(ctx, Intent.createChooser(intent, null), null)
+                        }
+                        else{
+                            val shareText = "Song: ${savedPiece.songName}\n " +
+                                "Song Artist: ${savedPiece.songArtist}\n" +
+                                "Art name: ${savedPiece.artName}\n" +
+                                "Artist Name: ${savedPiece.artArtist}\n" +
+                                savedPiece.imgUrl
+                            val intent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_TEXT, shareText)
+                                type = "text/plain"
+                            }
+                            startActivity(ctx, Intent.createChooser(intent, null), null)
+                        }
                     }
-                    startActivity(ctx, Intent.createChooser(intent, null), null)
-                } catch (e: Exception) {
-                    Log.e("Debug", "$e")
+                catch (e: Exception) {
+                    Log.e("Error", "$e")
                 }
             }
-
-
-//            val intent = Intent().apply {
-//                action = Intent.ACTION_SEND
-//                putExtra(Intent.EXTRA_TEXT, shareText)
-//                type = "text/plain"
-//            }
-//            val intent = Intent().apply {
-//                action = Intent.ACTION_SEND
-//                putExtra(Intent.EXTRA_TEXT, shareText)
-//                //putExtra(Intent.EXTRA_STREAM, art.drawable)
-//                type = "*/*"
-//            }
-//            startActivity(ctx, Intent.createChooser(intent, null), null)
         }
     }
 }
