@@ -4,6 +4,10 @@
     <string name="search_hint">Search for a song…</string>
     <string name="search">Search</string>
     <string name="randomize">Random Song</string>
+    <string name="gallery">Gallery</string>
+    <string name="masterpiece">New Masterpiece</string>
+    <string name="palette">Art Palette with Paint</string>
+    <string name="musicnote">Music Note</string>
 
     <string name="play_button">Play button</string>
     <string name="save_button">Save button</string>
