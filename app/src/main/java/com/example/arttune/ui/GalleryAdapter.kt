@@ -1,6 +1,9 @@
 package com.example.arttune.ui
 
 import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Log
 import com.bumptech.glide.Glide
 import android.view.LayoutInflater
@@ -9,9 +12,11 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
+import java.net.URL
 
 class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     private var viewModel: SavedPiecesViewModel? = null
@@ -44,6 +49,10 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
                 alert.show()
             }
         }
+
+        holder.shareButton.setOnClickListener{
+            holder.shareSavedPiece(gallery[position])
+        }
     }
 
     fun updateGallery(savedPieces: List<SavedPiece>?){
@@ -54,17 +63,36 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     fun getViewModel(savedViewModel: SavedPiecesViewModel){
         viewModel = savedViewModel
     }
+
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         private val songName: TextView = itemView.findViewById(R.id.tv_song_name)
         private val artistName: TextView = itemView.findViewById(R.id.tv_artist_name)
         private val art: ImageView = itemView.findViewById(R.id.iv_saved_art)
         val saveButton: ImageView = itemView.findViewById(R.id.iv_save_button)
+        val shareButton: ImageView = itemView.findViewById(R.id.iv_share_button)
+        private val ctx = itemView.context
 
         fun bind(savedPiece: SavedPiece){
-            val ctx = itemView.context
             songName.text = savedPiece.songName
             artistName.text = savedPiece.artist
             Glide.with(ctx).load(savedPiece.imgUrl).into(art)
+        }
+        fun shareSavedPiece(savedPiece: SavedPiece){
+            val shareText = "${savedPiece.songName}\n ${savedPiece.artist}"
+            //val uri = Uri.parse(savedPiece.imgUrl)
+
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareText)
+                type = "text/plain"
+            }
+//            val intent = Intent().apply {
+//                action = Intent.ACTION_SEND
+//                putExtra(Intent.EXTRA_TEXT, shareText)
+//                putExtra(Intent.EXTRA_STREAM, uri)
+//                type = "*/*"
+//            }
+            startActivity(ctx, Intent.createChooser(intent, null), null)
         }
     }
 }
