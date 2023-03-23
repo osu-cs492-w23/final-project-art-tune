@@ -76,7 +76,8 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
             val shareText = "Song: ${savedPiece.songName}\n " +
                     "Song Artist: ${savedPiece.songArtist}\n" +
                     "Art name: ${savedPiece.artName}\n" +
-                    "Artist Name: ${savedPiece.artArtist}"
+                    "Artist Name: ${savedPiece.artArtist}\n" +
+                    savedPiece.imgUrl
             //val uri = Uri.parse(savedPiece.imgUrl)
 
             val intent = Intent().apply {
