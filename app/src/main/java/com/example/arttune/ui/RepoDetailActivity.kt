@@ -1,26 +1,45 @@
 package com.example.arttune.ui
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.TextView
+import android.widget.ImageButton
+import android.widget.SeekBar
+import androidx.appcompat.app.AppCompatActivity
 import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
-import com.google.android.material.snackbar.Snackbar
 
 const val EXTRA_GITHUB_REPO = "GITHUB_REPO"
 
 class RepoDetailActivity : AppCompatActivity() {
     private var repo: SpotifyTrack? = null
 
+    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var playButton: ImageButton
+    private lateinit var pauseButton: ImageButton
+    private lateinit var seekBar: SeekBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_repo_detail)
-//
+        setContentView(R.layout.spotify_track_detail)
+
+        //mediaPlayer = MediaPlayer.create(this,"TODO: URI or https to stream media from")
+        playButton = findViewById(R.id.detail_play_button)
+        pauseButton = findViewById(R.id.detail_seekbar)
+        seekBar = findViewById(R.id.detail_seekbar)
+
+        pauseButton.isEnabled = false
+
+        playButton.setOnClickListener {
+            //mediaPlayer.start()
+            pauseButton.isEnabled = true
+            playButton.isEnabled = false
+        }
+
+        pauseButton.setOnClickListener {
+            //mediaPlayer.pause();
+            pauseButton.isEnabled = false
+            playButton.isEnabled = true
+        }//
 //        /*
 //         * If an intent was used to launch this activity and it contains information about a
 //         * GitHub repo, use that information to populate the UI.

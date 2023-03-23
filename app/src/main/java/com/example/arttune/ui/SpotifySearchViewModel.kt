@@ -5,17 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.adamratzman.spotify.GenericSpotifyApi
-import com.adamratzman.spotify.SpotifyApiBuilder
-import com.adamratzman.spotify.SpotifyAppApiBuilder
 import com.adamratzman.spotify.endpoints.pub.SearchApi
 import com.adamratzman.spotify.models.PagingObject
-import com.adamratzman.spotify.models.SpotifySearchResult
 import com.adamratzman.spotify.models.Track
 import com.example.arttune.api.SpotifyService
 import com.example.arttune.data.LoadingStatus
 import com.example.arttune.data.SpotifyTrack
-import com.example.arttune.data.SpotifyTrackItemsJson
 import com.example.arttune.data.SpotifyTracksRepository
 import kotlinx.coroutines.launch
 import kotlin.math.floor
@@ -38,7 +33,7 @@ class SpotifySearchViewModel : ViewModel() {
 
     var searchApi : SearchApi? = null
 
-    fun loadSearch(q: String, key: String) {
+    fun loadSearch(q: String) {
         viewModelScope.launch {
             _loadingStatus.value = LoadingStatus.LOADING
             _errorMessage.value = null
@@ -48,9 +43,8 @@ class SpotifySearchViewModel : ViewModel() {
             // val result = repository.loadTracksSearch(q, key)
             // val result = searchApi?.searchTrack(q)?.items
             val result = searchApi?.searchTrack(q, 5)
-            Log.v("result before", "$result")
             cleanSpotifyResults(result)
-            Log.v("result after", "$result")
+            Log.v("result", "$result")
             _loadingStatus.value = when (result.isNullOrEmpty()) {
                 false -> LoadingStatus.SUCCESS
                 true -> LoadingStatus.ERROR
@@ -113,7 +107,7 @@ class SpotifySearchViewModel : ViewModel() {
             }
         }
         _apiResult = fullResultSet
-        Log.d("Spotify repo", "result of search is: ${fullResultSet}")
+        Log.d("Spotify repo", "result of search is: $fullResultSet")
     }
     fun connect(){
         viewModelScope.launch {
