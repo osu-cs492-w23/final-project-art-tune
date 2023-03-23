@@ -14,7 +14,7 @@ import com.example.arttune.R
 import com.example.arttune.data.SpotifyTrack
 import com.bumptech.glide.Glide
 
-class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
+class TrackAdapter(private val onTrackClick: (Track) -> Unit) : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     private var tracks = listOf<Track>()
 
     override fun getItemCount() = tracks.size
@@ -27,14 +27,14 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.spotify_track_list_item, parent, false)
-        return TrackViewHolder(itemView)
+        return TrackViewHolder(itemView, onTrackClick)
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         holder.bind(tracks[position])
     }
 
-    class TrackViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class TrackViewHolder (view: View, private val onClick: (Track) -> Unit) : RecyclerView.ViewHolder(view) {
         private var currentTrack: Track? = null
         private val nameTV = view.findViewById<TextView>(R.id.tv_track_title)
         private val artistTV = view.findViewById<TextView>(R.id.tv_track_artist)
@@ -42,6 +42,12 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
         private val artTV = view.findViewById<ImageView>(R.id.iv_track_image)
         private val uriTV = view.findViewById<TextView>(R.id.link)
         private val ctx = view.context
+
+        init {
+            view.setOnClickListener {
+                currentTrack?.let(onClick)
+            }
+        }
 
         fun bind(track: Track) {
             currentTrack = track
@@ -53,7 +59,7 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
             val timeInSeconds = (track.length/1000)
             val minutes = (timeInSeconds/60)
             val remainderSeconds = (timeInSeconds%60)
-            val timeString = "$minutes:$remainderSeconds"
+            val timeString = String.format("%d:%02d", minutes, remainderSeconds)
             lengthTV.text = timeString
 
             // Log.v("track info", "${track.album.images[0].url}, ${nameTV.text}, ${artistTV.text}, ${lengthTV.text}, ${uriTV.text}")

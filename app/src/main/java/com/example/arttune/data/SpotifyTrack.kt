@@ -12,7 +12,8 @@ data class SpotifyTrack(
     val releaseDate: String,
     val length: Int,
     val id: String,
-    val trackTitle: String
+    val trackTitle: String,
+    val preview: String
 ) : Serializable
 
 @JsonClass(generateAdapter = true)
@@ -20,6 +21,7 @@ data class SpotifyTrackItemsJson(
     val album: AlbumJson,
     val artists: ArtistListJson,
     val duration_ms: Int,
+    val preview_url: String,
     val id: String,
     val name: String
 )
@@ -52,7 +54,8 @@ class SpotifyJsonAdapter {
         releaseDate = track.album.release_date,
         id = track.id,
         trackTitle = track.name,
-        length = track.duration_ms / 1000
+        length = track.duration_ms / 1000,
+        preview = track.preview_url
     )
 
     @ToJson
