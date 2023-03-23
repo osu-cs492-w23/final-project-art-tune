@@ -14,7 +14,9 @@ import com.example.arttune.data.SpotifyTrack
 const val EXTRA_TRACK = ""
 
 class TrackDetailActivity : AppCompatActivity() {
-    private var track: Track? = null
+    companion object TrackObject {
+        var track: Track? = null
+    }
 
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var playButton: ImageButton
@@ -25,16 +27,18 @@ class TrackDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.spotify_track_detail)
 
-        if (intent != null && intent.hasExtra(EXTRA_TRACK)) {
-            track = intent.getSerializableExtra(EXTRA_TRACK) as Track
-
+        if (intent != null && track != null) {
             findViewById<TextView>(R.id.tv_detail_track_title).text = track!!.name
             findViewById<TextView>(R.id.tv_detail_track_artist).text = track!!.artists[0].name
-            findViewById<TextView>(R.id.tv_detail_track_length).text = track!!.length.toString()
 
+            val timeInSeconds = (track!!.length/1000)
+            val minutes = (timeInSeconds/60)
+            val remainderSeconds = (timeInSeconds%60)
+            val timeString = "$minutes:$remainderSeconds"
+            findViewById<TextView>(R.id.tv_detail_track_length).text = timeString
         }
 
-/*        val url = track!!.previewUrl
+        val url = track!!.previewUrl
         mediaPlayer = MediaPlayer().apply {
             setAudioAttributes(
                 AudioAttributes.Builder()
@@ -44,7 +48,7 @@ class TrackDetailActivity : AppCompatActivity() {
             )
             setDataSource(url)
             prepare() // might take long! (for buffering, etc)
-        }*/
+        }
 
         playButton = findViewById(R.id.detail_play_button)
         pauseButton = findViewById(R.id.detail_pause_button)
@@ -53,13 +57,13 @@ class TrackDetailActivity : AppCompatActivity() {
         pauseButton.isEnabled = false
 
         playButton.setOnClickListener {
-            //mediaPlayer.start()
+            mediaPlayer.start()
             pauseButton.isEnabled = true
             playButton.isEnabled = false
         }
 
         pauseButton.setOnClickListener {
-            //mediaPlayer.pause()
+            mediaPlayer.pause()
             pauseButton.isEnabled = false
             playButton.isEnabled = true
         }
