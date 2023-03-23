@@ -42,9 +42,9 @@ class TrackAdapter() : RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
             artistTV.text = track.artists[0].name
             nameTV.text = track.name
 
-            val timeInSeconds = (track.length/1000).toInt()
-            val minutes = (timeInSeconds/60).toInt()
-            val remainderSeconds = (timeInSeconds%60).toInt()
+            val timeInSeconds = (track.length/1000)
+            val minutes = (timeInSeconds/60)
+            val remainderSeconds = (timeInSeconds%60)
             val timeString = "$minutes:$remainderSeconds"
             lengthTV.text = timeString
 
