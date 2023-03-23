@@ -17,10 +17,10 @@
     <TextView
         android:id="@+id/tv_track_title"
         android:textStyle="bold"
-        android:textSize="17dp"
+        android:textSize="17sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/title"
         android:layout_marginLeft="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/iv_track_image" />
@@ -29,7 +29,7 @@
         android:id="@+id/tv_track_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Artist"
+        android:text="@string/artist"
         android:layout_marginLeft="10dp"
         app:layout_constraintTop_toBottomOf="@id/tv_track_title"
         app:layout_constraintLeft_toRightOf="@id/iv_track_image" />
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:text="Length"
+        android:text="@string/length"
         app:layout_constraintLeft_toRightOf="@id/tv_track_artist"
         app:layout_constraintTop_toBottomOf="@+id/tv_track_title" />
 
