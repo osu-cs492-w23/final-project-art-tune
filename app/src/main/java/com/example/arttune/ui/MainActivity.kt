@@ -18,9 +18,6 @@ import com.example.arttune.R
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
-const val SPOTIFY_KEY = "9f02ab55a6bb4fdc8ab0e42a6208574a"
-const val ART_KEY = ""
-
 class MainActivity : AppCompatActivity() {
     private val spotifySearchViewModel: SpotifySearchViewModel by viewModels()
     private val artSearchViewModel : ChicagoArtViewModel by viewModels()
