@@ -22,12 +22,10 @@ const val SPOTIFY_KEY = "9f02ab55a6bb4fdc8ab0e42a6208574a"
 const val ART_KEY = ""
 
 class MainActivity : AppCompatActivity() {
-    private val tag = "MainActivity"
     private val spotifySearchViewModel: SpotifySearchViewModel by viewModels()
     private val artSearchViewModel : ChicagoArtViewModel by viewModels()
     private val trackListAdapter = TrackAdapter(::onTrackClick)
     private lateinit var searchResultsListRV: RecyclerView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             if (!TextUtils.isEmpty(query)) {
                 spotifySearchViewModel.loadSearch(query)
                 if (trackListAdapter.itemCount == 0) {
-                    Snackbar.make(coordinatorView,"Couldn't find $query.", BaseTransientBottomBar.LENGTH_SHORT).show()
+                    Snackbar.make(coordinatorView,"No results found for \"$query\".", BaseTransientBottomBar.LENGTH_SHORT).show()
                 }
                 searchResultsListRV.scrollToPosition(0)
             }
@@ -73,8 +71,6 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-
-
 
         /*// FOR TESTING DELETE LATER
         val temp = artSearchViewModel.loadSearch("cat")

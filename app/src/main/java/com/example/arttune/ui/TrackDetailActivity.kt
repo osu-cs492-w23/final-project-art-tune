@@ -2,7 +2,6 @@ package com.example.arttune.ui
 
 import android.content.Intent
 import android.media.AudioAttributes
-import android.media.Image
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
@@ -16,15 +15,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import com.adamratzman.spotify.models.Track
+import com.bumptech.glide.Glide
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
-import com.example.arttune.data.SpotifyTrack
-import com.bumptech.glide.Glide
-import com.example.arttune.data.ArtPieceRepository
-import okhttp3.internal.wait
-import org.w3c.dom.Text
-
-const val EXTRA_TRACK = ""
 
 class TrackDetailActivity : AppCompatActivity() {
     companion object TrackObject {
