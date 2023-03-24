@@ -71,9 +71,8 @@ class MainActivity : AppCompatActivity() {
         val temp = artSearchViewModel.loadSearch("cat")
         artSearchViewModel.loadInfo("656")
 
-        Log.d("Main","Temp is: ${artSearchViewModel.searchResults.value}")
-        Log.d("Main", "ART INFO IS: ${artSearchViewModel.artInfo.value}")
-
+//        Log.d("Main","Temp is: ${artSearchViewModel.searchResults.value}")
+//        Log.d("Main", "ART INFO IS: ${artSearchViewModel.searchResults.value}")
 
         // WORKS, SOMETIMES IS LATE TO GET RESULTS
         val temp1 = spotifySearchViewModel.getTracks("lover")
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
     private fun onTrackClick(track: Track) {
         val intent = Intent(this, TrackDetailActivity::class.java)
         //intent.putExtra(EXTRA_TRACK, track)
-        TrackDetailActivity.TrackObject.track = track
+        TrackDetailActivity.track = track
         startActivity(intent)
     }
 
