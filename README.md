@@ -38,6 +38,10 @@ British, 1819-1909
 
 **Avery Mao**
 
-**Nawaf Alothman**
+**Nawaf Alothman**, *Geist by OVERWERK*<br/>
+<img src ="https://user-images.githubusercontent.com/72106212/227619924-0c41c2c9-f026-4ebf-92b4-33a524e59206.png" width="600"><br/>
+Title: The Essex Canal <br/>
+Date: 1896 <br/>
+Artist: Albert Pinkham Ryder
 
 **Taite Dodson**
