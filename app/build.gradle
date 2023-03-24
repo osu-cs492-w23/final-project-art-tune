@@ -16,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "SPOTIFY_USER", SPOTIFY_USER)
+        buildConfigField("String", "SPOTIFY_API_KEY", SPOTIFY_API_KEY)
     }
 
     buildTypes {
