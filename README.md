@@ -44,4 +44,9 @@ Title: The Essex Canal <br/>
 Date: 1896 <br/>
 Artist: Albert Pinkham Ryder
 
-**Taite Dodson**
+**Taite Dodson**, *Creepin' by Metro Booming*<br/>
+<img src = "https://www.vangoghstudio.com//Files/6/102000/102147/ProductPhotos/1000x525/1388609811.jpg" width="600"><br/>
+Title: Skull of a Skeleton with Burning Cigarette <br/>
+Date: 1885 <br/>
+Artist: Vincent van Gogh
+
