@@ -12,7 +12,7 @@ data class ArtPiece (
     val title: String,
     val timestamp: String,
     val date: String,
-    val artist: String,
+    val artist: String?,
     val medium: String
 ) : Serializable
 
@@ -36,7 +36,7 @@ data class ArtWork (
 data class ArtWorkInfo (
     val id: Int,
     val date_display: String,
-    val artist_title: String,
+    val artist_title: String? = "",
     val medium_display: String,
     val image_id: String,
     val api_link: String,

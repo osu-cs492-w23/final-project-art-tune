@@ -114,7 +114,7 @@ class TrackDetailActivity : AppCompatActivity() {
                 track!!.name,
                 track!!.artists[0].name,
                 globalInfo!!.title,
-                globalInfo!!.artist_title,
+                globalInfo!!.artist_title.toString(),
                 artUrl,
                 url
             )
