@@ -2,7 +2,6 @@ package com.example.arttune.data
 
 import android.util.Log
 import com.example.arttune.api.ChicagoArtService
-import com.example.arttune.api.SpotifyService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,7 +10,6 @@ class ArtPieceRepository (
     private val service: ChicagoArtService,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-
 
     suspend fun loadArtSearch(q: String) : Result<List<ArtPiece>> =
         withContext(dispatcher) {
