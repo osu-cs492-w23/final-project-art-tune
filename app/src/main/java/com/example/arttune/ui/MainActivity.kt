@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         // val temp = artSearchViewModel.loadSearch("cat")
 
         // ART DEPENDS ON THIS LINE
-        artSearchViewModel.loadInfo("656")
+//        artSearchViewModel.loadInfo("656")
         spotifySearchViewModel.connect()
 
     }
@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
     private fun onTrackClick(track: Track) {
         val intent = Intent(this, TrackDetailActivity::class.java)
         TrackDetailActivity.TrackObject.track = track
+        artSearchViewModel.loadSearch(track.name)
         startActivity(intent)
     }
 

@@ -93,7 +93,7 @@ class TrackDetailActivity : AppCompatActivity() {
 
             artSearchViewModel.loadSearch(track!!.name)
             artSearchViewModel.searchResults.observe(this) { searchResults ->
-                id = searchResults!![0].id
+                id = searchResults?.get(0)?.id ?: 0
             }
 
             val artistName = globalInfo!!.artist_title
@@ -125,23 +125,25 @@ class TrackDetailActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.spotify_track_detail, menu)
 
         val saveAction =menu?.findItem(R.id.action_savePiece)
-        viewModel.getPieceByName(savedPiece!!.songName).observe(this){savedPiece->
-            when(savedPiece){
-                null->{
-                    isSaved = false
-                    saveAction?.isChecked = false
-                    saveAction?.icon = AppCompatResources.getDrawable(
-                        this,
-                        R.drawable.ic_action_bookmark_off
-                    )
-                }
-                else->{
-                    isSaved = true
-                    saveAction?.isChecked = true
-                    saveAction?.icon = AppCompatResources.getDrawable(
-                        this,
-                        R.drawable.ic_action_bookmark_on
-                    )
+        savedPiece?.let {
+            viewModel.getPieceByName(it.songName).observe(this){ savedPiece->
+                when(savedPiece){
+                    null->{
+                        isSaved = false
+                        saveAction?.isChecked = false
+                        saveAction?.icon = AppCompatResources.getDrawable(
+                            this,
+                            R.drawable.ic_action_bookmark_off
+                        )
+                    }
+                    else->{
+                        isSaved = true
+                        saveAction?.isChecked = true
+                        saveAction?.icon = AppCompatResources.getDrawable(
+                            this,
+                            R.drawable.ic_action_bookmark_on
+                        )
+                    }
                 }
             }
         }
@@ -161,6 +163,11 @@ class TrackDetailActivity : AppCompatActivity() {
             }
             else->super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
     }
 
     private fun toggleSave(){
