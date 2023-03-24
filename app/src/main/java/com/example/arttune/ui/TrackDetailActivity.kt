@@ -58,13 +58,16 @@ class TrackDetailActivity : AppCompatActivity() {
             val artDisplay = artSearchViewModel.loadInfo("34")
             Log.v("artTitle", artTitle.toString())
             Log.v("artDisplay", artDisplay.toString())
+            //val artistName = artSearchViewModel.loadSearch(track!!.artists)
             // val artistName = artSearchView
+            if(globalInfo != null){
+                val classicArt = findViewById<ImageView>(R.id.iv_detail_art)
+                val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+                Glide.with(ctx).load("https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg").into(classicArt)
+            }
 
             // findViewById<TextView>(R.id.tv_detail_art_title).text = artTitle
             // findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
-            val classicArt = findViewById<ImageView>(R.id.iv_detail_art)
-            val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
-            Glide.with(ctx).load("https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg").into(classicArt)
         }
 
         val url = track!!.previewUrl
@@ -99,15 +102,20 @@ class TrackDetailActivity : AppCompatActivity() {
         }
 
         //Mostly placeholder
-        if(url != null)
+        if(url != null && globalInfo != null) {
+            val artistName = globalInfo!!.artist_title
+            val artName = globalInfo!!.title
+            findViewById<TextView>(R.id.tv_detail_art_title).text = artName
+            findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
             savedPiece = SavedPiece(
                 track!!.name,
                 track!!.artists[0].name,
-                "Placeholder",
-                "Artist",
+                globalInfo!!.title,
+                globalInfo!!.artist_title,
                 "https://i.kym-cdn.com/entries/icons/medium/000/021/151/images.jpg",
                 url
             )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
