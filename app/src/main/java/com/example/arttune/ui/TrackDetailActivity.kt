@@ -5,6 +5,7 @@ import android.media.AudioAttributes
 import android.media.Image
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
@@ -19,6 +20,9 @@ import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
 import com.example.arttune.data.SpotifyTrack
 import com.bumptech.glide.Glide
+import com.example.arttune.data.ArtPieceRepository
+import okhttp3.internal.wait
+import org.w3c.dom.Text
 
 const val EXTRA_TRACK = ""
 
@@ -27,6 +31,7 @@ class TrackDetailActivity : AppCompatActivity() {
         var track: Track? = null
     }
 
+    private val artSearchViewModel : ChicagoArtViewModel by viewModels()
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var playButton: ImageButton
     private lateinit var pauseButton: ImageButton
@@ -54,6 +59,19 @@ class TrackDetailActivity : AppCompatActivity() {
             val remainderSeconds = (timeInSeconds%60)
             val timeString = String.format("%d:%02d", minutes, remainderSeconds)
             findViewById<TextView>(R.id.tv_detail_track_length).text = timeString
+
+            val artTitle = artSearchViewModel.loadSearch(track!!.name)
+            // Load Info needs to unique id from loadSearch
+            val artDisplay = artSearchViewModel.loadInfo("34")
+            Log.v("artTitle", artTitle.toString())
+            Log.v("artDisplay", artDisplay.toString())
+            // val artistName = artSearchView
+
+            // findViewById<TextView>(R.id.tv_detail_art_title).text = artTitle
+            // findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
+            val classicArt = findViewById<ImageView>(R.id.iv_detail_art)
+            val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+            Glide.with(ctx).load("https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg").into(classicArt)
         }
 
         val url = track!!.previewUrl
@@ -75,6 +93,7 @@ class TrackDetailActivity : AppCompatActivity() {
         pauseButton.isEnabled = false
 
         playButton.setOnClickListener {
+            Log.d("play", "clicked")
             mediaPlayer.start()
             pauseButton.isEnabled = true
             playButton.isEnabled = false

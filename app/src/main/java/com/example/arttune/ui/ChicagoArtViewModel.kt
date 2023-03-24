@@ -34,13 +34,14 @@ class ChicagoArtViewModel : ViewModel() {
             }
             _searchResults.value = result.getOrNull()
             _errorMessage.value = result.exceptionOrNull()?.message
+            Log.d("loadSearch", searchResults.value?.get(0)?.medium.toString())
         }
     }
 
     fun loadInfo(q: String){
         viewModelScope.launch {
             val result = repository.loadArtInfo(q)
-            Log.d("viewmodel", "result : $result")
+            Log.d("loadInfo", "result : $result")
             _artInfo.value = result.getOrNull()
         }
     }
