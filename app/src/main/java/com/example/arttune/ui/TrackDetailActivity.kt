@@ -1,14 +1,20 @@
 package com.example.arttune.ui
 
+import android.content.Intent
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
+import com.example.arttune.data.SavedPiece
 import com.example.arttune.data.SpotifyTrack
 
 const val EXTRA_TRACK = ""
@@ -22,6 +28,10 @@ class TrackDetailActivity : AppCompatActivity() {
     private lateinit var playButton: ImageButton
     private lateinit var pauseButton: ImageButton
     private lateinit var seekBar: SeekBar
+
+    private var isSaved = false
+    private val viewModel:SavedPiecesViewModel by viewModels()
+    private var savedPiece: SavedPiece? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +78,73 @@ class TrackDetailActivity : AppCompatActivity() {
             playButton.isEnabled = true
         }
 
-
+        //Mostly placeholder
+        if(url != null)
+            savedPiece = SavedPiece(
+                track!!.name,
+                track!!.artists[0].name,
+                "Placeholder",
+                "Artist",
+                "https://i.kym-cdn.com/entries/icons/medium/000/021/151/images.jpg",
+                url
+            )
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.spotify_track_detail, menu)
+
+        val saveAction =menu?.findItem(R.id.action_savePiece)
+        viewModel.getPieceByName(savedPiece!!.songName).observe(this){savedPiece->
+            when(savedPiece){
+                null->{
+                    isSaved = false
+                    saveAction?.isChecked = false
+                    saveAction?.icon = AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_action_bookmark_off
+                    )
+                }
+                else->{
+                    isSaved = true
+                    saveAction?.isChecked = true
+                    saveAction?.icon = AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_action_bookmark_on
+                    )
+                }
+            }
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_gallery_detail->{
+                val intent = Intent(this, GalleryActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.action_savePiece->{
+                toggleSave()
+                true
+            }
+            else->super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toggleSave(){
+        if(savedPiece != null){
+            when(isSaved){
+                false->{
+                    viewModel.addSavedPiece(savedPiece!!)
+                }
+                true->{
+                    viewModel.removeSavedPiece(savedPiece!!)
+                }
+            }
+        }
+    }
+
 //
 //    /**
 //     * This method adds a custom menu to the action bar for this activity.

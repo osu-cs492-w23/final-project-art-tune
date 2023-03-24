@@ -9,5 +9,6 @@ data class SavedPiece(
     val songArtist: String,
     val artName: String,
     val artArtist: String,
-    val imgUrl: String
+    var imgUrl: String,
+    var previewUrl: String
 )

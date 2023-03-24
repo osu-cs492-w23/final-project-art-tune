@@ -27,4 +27,6 @@ class SavedPiecesViewModel(application: Application): AndroidViewModel(applicati
             repository.deleteSavedPiece(savedPiece)
         }
     }
+
+    fun getPieceByName(name: String) =repository.getPieceByName(name).asLiveData()
 }
