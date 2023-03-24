@@ -58,16 +58,12 @@ class TrackDetailActivity : AppCompatActivity() {
             val artDisplay = artSearchViewModel.loadInfo("34")
             Log.v("artTitle", artTitle.toString())
             Log.v("artDisplay", artDisplay.toString())
-            //val artistName = artSearchViewModel.loadSearch(track!!.artists)
-            // val artistName = artSearchView
+
             if(globalInfo != null){
                 val classicArt = findViewById<ImageView>(R.id.iv_detail_art)
-                val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+                val uniqueId = globalInfo!!.image_id
                 Glide.with(ctx).load("https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg").into(classicArt)
             }
-
-            // findViewById<TextView>(R.id.tv_detail_art_title).text = artTitle
-            // findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
         }
 
         val url = track!!.previewUrl
@@ -103,12 +99,14 @@ class TrackDetailActivity : AppCompatActivity() {
 
         //Mostly placeholder
         if(url != null && globalInfo != null) {
+            Log.e("Debug", "$globalInfo")
             val artistName = globalInfo!!.artist_title
             val artName = globalInfo!!.title
             findViewById<TextView>(R.id.tv_detail_art_title).text = artName
             findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
 
-            val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+            //val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+            val uniqueId = globalInfo!!.image_id
             val artUrl = "https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg"
 
             savedPiece = SavedPiece(
