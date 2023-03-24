@@ -56,7 +56,7 @@ class TrackDetailActivity : AppCompatActivity() {
             val artDisplay = artSearchViewModel.loadInfo("34")
             Log.v("artTitle", artTitle.toString())
             Log.v("artDisplay", artDisplay.toString())
-            // val artistName = baseSearch?.
+            // val artistName = artSearchView
 
             // findViewById<TextView>(R.id.tv_detail_art_title).text = artTitle
             // findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName

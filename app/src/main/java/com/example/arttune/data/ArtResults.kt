@@ -10,10 +10,13 @@ data class ArtResults (
 
 @JsonClass(generateAdapter = true)
 data class ArtPiece (
+    @Json(name = "api_link") val link: String,
     val id: Int,
     val title: String,
     val timestamp: String,
-    @Json(name = "api_link") val link: String
+    @Json(name = "date_display") val date: String,
+    @Json(name = "artist_title") val artist: String,
+    @Json(name = "medium_display") val medium: String
 ) : java.io.Serializable
 
 
