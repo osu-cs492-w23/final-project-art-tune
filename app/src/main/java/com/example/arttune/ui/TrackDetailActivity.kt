@@ -2,11 +2,13 @@ package com.example.arttune.ui
 
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.Image
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -16,6 +18,7 @@ import com.adamratzman.spotify.models.Track
 import com.example.arttune.R
 import com.example.arttune.data.SavedPiece
 import com.example.arttune.data.SpotifyTrack
+import com.bumptech.glide.Glide
 
 const val EXTRA_TRACK = ""
 
@@ -38,13 +41,18 @@ class TrackDetailActivity : AppCompatActivity() {
         setContentView(R.layout.spotify_track_detail)
 
         if (intent != null && track != null) {
+            val ctx = applicationContext
+            val coverArt = findViewById<ImageView>(R.id.iv_detail_track_cover)
+
+            Glide.with(ctx).load(track!!.album.images[0].url).into(coverArt)
+
             findViewById<TextView>(R.id.tv_detail_track_title).text = track!!.name
             findViewById<TextView>(R.id.tv_detail_track_artist).text = track!!.artists[0].name
 
             val timeInSeconds = (track!!.length/1000)
             val minutes = (timeInSeconds/60)
             val remainderSeconds = (timeInSeconds%60)
-            val timeString = "$minutes:$remainderSeconds"
+            val timeString = String.format("%d:%02d", minutes, remainderSeconds)
             findViewById<TextView>(R.id.tv_detail_track_length).text = timeString
         }
 
