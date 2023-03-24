@@ -34,7 +34,7 @@ class ChicagoArtViewModel : ViewModel() {
             }
             _searchResults.value = result.getOrNull()
             _errorMessage.value = result.exceptionOrNull()?.message
-            Log.d("loadSearch", searchResults.value?.get(0)?.medium.toString())
+            Log.d("loadSearch", searchResults.value?.get(0).toString())
         }
     }
 

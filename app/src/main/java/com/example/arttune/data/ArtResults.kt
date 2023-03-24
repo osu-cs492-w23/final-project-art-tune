@@ -14,9 +14,9 @@ data class ArtPiece (
     val id: Int,
     val title: String,
     val timestamp: String,
-    @Json(name = "date_display") val date: String,
-    @Json(name = "artist_title") val artist: String,
-    @Json(name = "medium_display") val medium: String
+    @Json(name = "date_display") val date: String? = "",
+    @Json(name = "artist_title") val artist: String? = "",
+    @Json(name = "medium_display") val medium: String? = ""
 ) : java.io.Serializable
 
 
