@@ -107,12 +107,16 @@ class TrackDetailActivity : AppCompatActivity() {
             val artName = globalInfo!!.title
             findViewById<TextView>(R.id.tv_detail_art_title).text = artName
             findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
+
+            val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+            val artUrl = "https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg"
+
             savedPiece = SavedPiece(
                 track!!.name,
                 track!!.artists[0].name,
                 globalInfo!!.title,
                 globalInfo!!.artist_title,
-                "https://i.kym-cdn.com/entries/icons/medium/000/021/151/images.jpg",
+                artUrl,
                 url
             )
         }
