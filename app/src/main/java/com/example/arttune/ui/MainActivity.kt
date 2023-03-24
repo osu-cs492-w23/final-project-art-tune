@@ -64,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         // THESE ARE FOR TESTING DELETE LATER
-        val temp = artSearchViewModel.loadSearch("cat")
+        // val temp = artSearchViewModel.loadSearch("cat")
+
+        // ART DEPENDS ON THIS LINE
         artSearchViewModel.loadInfo("656")
         spotifySearchViewModel.connect()
 

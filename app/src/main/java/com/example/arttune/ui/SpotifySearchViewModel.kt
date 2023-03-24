@@ -103,7 +103,7 @@ class SpotifySearchViewModel : ViewModel() {
             }
         }
         _apiResult = fullResultSet
-        Log.d("Spotify repo", "result of search is: $fullResultSet")
+        // Log.d("Spotify repo", "result of search is: $fullResultSet")
     }
     fun connect(){
         viewModelScope.launch {

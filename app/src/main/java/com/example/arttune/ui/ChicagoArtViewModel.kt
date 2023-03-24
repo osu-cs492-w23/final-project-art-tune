@@ -10,6 +10,7 @@ import com.example.arttune.api.SpotifyService
 import com.example.arttune.data.*
 import kotlinx.coroutines.launch
 
+var globalInfo: ArtWorkInfo? = null
 class ChicagoArtViewModel : ViewModel() {
     private val repository = ArtPieceRepository(ChicagoArtService.create())
     private val _searchResults = MutableLiveData<List<ArtPiece>?>(null)
@@ -34,7 +35,8 @@ class ChicagoArtViewModel : ViewModel() {
             }
             _searchResults.value = result.getOrNull()
             _errorMessage.value = result.exceptionOrNull()?.message
-            Log.d("loadSearch", searchResults.value?.get(0).toString())
+            Log.e("Degbug", "${result}")
+            //Log.e("loadSearch", searchResults.value?.get(0).toString())
         }
     }
 
@@ -43,6 +45,7 @@ class ChicagoArtViewModel : ViewModel() {
             val result = repository.loadArtInfo(q)
             Log.d("loadInfo", "result : $result")
             _artInfo.value = result.getOrNull()
+            globalInfo = result.getOrNull()
         }
     }
 }

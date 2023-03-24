@@ -24,6 +24,8 @@ We created this app as a creative way to combine two APIs and allow the user som
 <img src="https://user-images.githubusercontent.com/29801241/227377721-0c300ab1-3557-4249-a3c0-9b28ad1b8863.png" width="300"><br/>
 <img src="https://user-images.githubusercontent.com/29801241/227377729-7df2dceb-993a-4a56-915d-5ffe9376172d.png" width="300">
 <img src="https://user-images.githubusercontent.com/29801241/227377737-50d43e11-78ea-4fcf-b1b4-135b8ac32a67.png" width="300"><br/>
+<img src="https://user-images.githubusercontent.com/29801241/227476276-9aab3507-ec39-467d-944c-f893934e7018.png" width="300">
+<img src="https://user-images.githubusercontent.com/29801241/227476167-5c256c8c-3f10-4f4f-a382-2a3169b7ee0a.png" width="300"><br/>
 
 ## Contributors
 

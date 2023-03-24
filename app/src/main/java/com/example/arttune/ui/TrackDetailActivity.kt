@@ -52,19 +52,6 @@ class TrackDetailActivity : AppCompatActivity() {
             val remainderSeconds = (timeInSeconds%60)
             val timeString = String.format("%d:%02d", minutes, remainderSeconds)
             findViewById<TextView>(R.id.tv_detail_track_length).text = timeString
-
-            val artTitle = artSearchViewModel.loadSearch(track!!.name)
-            // Load Info needs to unique id from loadSearch
-            val artDisplay = artSearchViewModel.loadInfo("34")
-            Log.v("artTitle", artTitle.toString())
-            Log.v("artDisplay", artDisplay.toString())
-            // val artistName = artSearchView
-
-            // findViewById<TextView>(R.id.tv_detail_art_title).text = artTitle
-            // findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
-            val classicArt = findViewById<ImageView>(R.id.iv_detail_art)
-            val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
-            Glide.with(ctx).load("https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg").into(classicArt)
         }
 
         val url = track!!.previewUrl
@@ -99,15 +86,39 @@ class TrackDetailActivity : AppCompatActivity() {
         }
 
         //Mostly placeholder
-        if(url != null)
+        if(url != null && globalInfo != null) {
+            val ctx = applicationContext
+            Log.e("Debug", "$globalInfo")
+
+            val artTitle = artSearchViewModel.loadSearch(track!!.name)
+            // Load Info needs to unique id from loadSearch
+            // val artDisplay = artSearchViewModel.loadInfo("34")
+            Log.v("artTitle", artTitle.toString())
+            //Log.v("artDisplay", artDisplay.toString())
+
+            val artistName = globalInfo!!.artist_title
+            val artName = globalInfo!!.title
+            findViewById<TextView>(R.id.tv_detail_art_title).text = artName
+            findViewById<TextView>(R.id.tv_detail_art_artist).text = artistName
+            findViewById<TextView>(R.id.tv_detail_art_date).text = globalInfo!!.date_display
+            findViewById<TextView>(R.id.tv_detail_art_genre).text = globalInfo!!.medium_display
+
+            //val uniqueId = "1adf2696-8489-499b-cad2-821d7fde4b33"
+            val uniqueId = globalInfo!!.image_id
+            val artUrl = "https://www.artic.edu/iiif/2/${uniqueId}/full/843,/0/default.jpg"
+
+            val classicArt = findViewById<ImageView>(R.id.iv_detail_art)
+            Glide.with(ctx).load(artUrl).into(classicArt)
+
             savedPiece = SavedPiece(
                 track!!.name,
                 track!!.artists[0].name,
-                "Placeholder",
-                "Artist",
-                "https://i.kym-cdn.com/entries/icons/medium/000/021/151/images.jpg",
+                globalInfo!!.title,
+                globalInfo!!.artist_title,
+                artUrl,
                 url
             )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
