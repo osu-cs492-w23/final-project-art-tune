@@ -6,12 +6,6 @@ import com.squareup.moshi.JsonClass
 import com.squareup.moshi.ToJson
 import java.io.Serializable
 
-@JsonClass(generateAdapter = true)
-data class ArtResults (
-    @Json(name = "data") val artPieces: List<ArtPiece>,
-)
-
-@JsonClass(generateAdapter = true)
 data class ArtPiece (
     val link: String,
     val id: Int,
@@ -22,6 +16,10 @@ data class ArtPiece (
     val medium: String
 ) : Serializable
 
+@JsonClass(generateAdapter = true)
+data class ArtResults (
+    @Json(name = "data") val artPieces: List<ArtPiece>,
+)
 
 @JsonClass(generateAdapter = true)
 data class ArtWork (
