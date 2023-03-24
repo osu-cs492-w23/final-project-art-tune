@@ -11,7 +11,7 @@ class ArtPieceRepository (
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun loadArtSearch(q: String) : Result<List<ArtPiece>> =
+    suspend fun loadArtSearch(q: String) : Result<List<ArtworkSearchItem>> =
         withContext(dispatcher) {
             try {
                 val response = service.searchArt(q)

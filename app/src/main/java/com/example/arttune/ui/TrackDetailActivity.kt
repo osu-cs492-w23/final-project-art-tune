@@ -33,6 +33,7 @@ class TrackDetailActivity : AppCompatActivity() {
     private var isSaved = false
     private val viewModel:SavedPiecesViewModel by viewModels()
     private var savedPiece: SavedPiece? = null
+    private var id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,13 +89,12 @@ class TrackDetailActivity : AppCompatActivity() {
         //Mostly placeholder
         if(url != null && globalInfo != null) {
             val ctx = applicationContext
-            Log.e("Debug", "$globalInfo")
+            Log.e("detail activity", "$globalInfo")
 
-            val artTitle = artSearchViewModel.loadSearch(track!!.name)
-            // Load Info needs to unique id from loadSearch
-            // val artDisplay = artSearchViewModel.loadInfo("34")
-            Log.v("artTitle", artTitle.toString())
-            //Log.v("artDisplay", artDisplay.toString())
+            artSearchViewModel.loadSearch(track!!.name)
+            artSearchViewModel.searchResults.observe(this) { searchResults ->
+                id = searchResults!![0].id
+            }
 
             val artistName = globalInfo!!.artist_title
             val artName = globalInfo!!.title

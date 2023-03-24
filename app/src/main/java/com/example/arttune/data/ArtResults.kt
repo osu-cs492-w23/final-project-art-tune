@@ -17,8 +17,14 @@ data class ArtPiece (
 ) : Serializable
 
 @JsonClass(generateAdapter = true)
+data class ArtworkSearchItem (
+    val id: Int,
+    val title: String
+)
+
+@JsonClass(generateAdapter = true)
 data class ArtResults (
-    @Json(name = "data") val artPieces: List<ArtPiece>,
+    @Json(name = "data") val artPieces: List<ArtworkSearchItem>
 )
 
 @JsonClass(generateAdapter = true)
@@ -28,10 +34,10 @@ data class ArtWork (
 
 @JsonClass(generateAdapter = true)
 data class ArtWorkInfo (
+    val id: Int,
     val date_display: String,
     val artist_title: String,
     val medium_display: String,
-    val id: Int,
     val image_id: String,
     val api_link: String,
     val title: String,

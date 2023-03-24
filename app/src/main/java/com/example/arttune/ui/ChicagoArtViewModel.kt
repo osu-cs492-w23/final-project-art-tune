@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 var globalInfo: ArtWorkInfo? = null
 class ChicagoArtViewModel : ViewModel() {
     private val repository = ArtPieceRepository(ChicagoArtService.create())
-    private val _searchResults = MutableLiveData<List<ArtPiece>?>(null)
-    val searchResults: LiveData<List<ArtPiece>?> = _searchResults
+    private val _searchResults = MutableLiveData<List<ArtworkSearchItem>?>(null)
+    val searchResults: LiveData<List<ArtworkSearchItem>?> = _searchResults
 
     private val _loadingStatus = MutableLiveData<LoadingStatus>(LoadingStatus.SUCCESS)
     val loadingStatus: LiveData<LoadingStatus> = _loadingStatus
@@ -35,8 +35,7 @@ class ChicagoArtViewModel : ViewModel() {
             }
             _searchResults.value = result.getOrNull()
             _errorMessage.value = result.exceptionOrNull()?.message
-            Log.e("Degbug", "${result}")
-            //Log.e("loadSearch", searchResults.value?.get(0).toString())
+            Log.e("Art VM", "$result")
         }
     }
 
