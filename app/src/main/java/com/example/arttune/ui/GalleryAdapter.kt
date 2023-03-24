@@ -5,6 +5,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Looper
 import android.provider.MediaStore
@@ -27,6 +29,7 @@ import kotlin.concurrent.thread
 class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     private var viewModel: SavedPiecesViewModel? = null
     private var gallery: MutableList<SavedPiece> = mutableListOf()
+    private var mediaPlayer: MediaPlayer? = null
     override fun getItemCount(): Int = gallery.size
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -59,6 +62,35 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         holder.shareButton.setOnClickListener{
             holder.shareSavedPiece(gallery[position])
         }
+
+        holder.playButton.setOnClickListener{
+            playMusic(gallery[position].previewUrl)
+        }
+
+        holder.pauseButton.setOnClickListener{
+            if(mediaPlayer != null && mediaPlayer!!.isPlaying)
+                mediaPlayer!!.stop()
+        }
+    }
+
+    private fun playMusic(url: String){
+        if (mediaPlayer != null)
+            mediaPlayer!!.stop()
+        try {
+            mediaPlayer = MediaPlayer().apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
+                setDataSource(url)
+                prepare() // might take long! (for buffering, etc)
+            }
+            mediaPlayer!!.start()
+        }catch (e: Exception){
+            Log.e("Gallery", "Error playing song: $e")
+        }
     }
 
     fun updateGallery(savedPieces: List<SavedPiece>?){
@@ -76,6 +108,8 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
         private val art: ImageView = itemView.findViewById(R.id.iv_saved_art)
         val saveButton: ImageView = itemView.findViewById(R.id.iv_save_button)
         val shareButton: ImageView = itemView.findViewById(R.id.iv_share_button)
+        val playButton: ImageView = itemView.findViewById(R.id.iv_play_button)
+        val pauseButton: ImageView = itemView.findViewById(R.id.iv_pause_button)
         private val ctx = itemView.context
 
         fun bind(savedPiece: SavedPiece){
@@ -91,41 +125,41 @@ class GalleryAdapter: RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
                     if(ContextCompat.checkSelfPermission(
                             ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE
                         ) == PackageManager.PERMISSION_GRANTED){
-                            val shareText = "Song: ${savedPiece.songName}\n " +
+                        val shareText = "Song: ${savedPiece.songName}\n " +
                                 "Song Artist: ${savedPiece.songArtist}\n" +
                                 "Art name: ${savedPiece.artName}\n" +
                                 "Artist Name: ${savedPiece.artArtist}"
-                            val bitmap =
-                                BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                            val rand = Random()
-                            val randNo = rand.nextInt(10000)
-                            val imgBitmapPath = MediaStore.Images.Media.insertImage(
-                                ctx.contentResolver, bitmap, "IMG:$randNo", null
-                            )
-                            val imgBitUri = Uri.parse(imgBitmapPath)
+                        val bitmap =
+                            BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                        val rand = Random()
+                        val randNo = rand.nextInt(10000)
+                        val imgBitmapPath = MediaStore.Images.Media.insertImage(
+                            ctx.contentResolver, bitmap, "IMG:$randNo", null
+                        )
+                        val imgBitUri = Uri.parse(imgBitmapPath)
 
-                            val intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, shareText)
-                                putExtra(Intent.EXTRA_STREAM, imgBitUri)
-                                type = "*/*"
-                            }
-                            startActivity(ctx, Intent.createChooser(intent, null), null)
+                        val intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, shareText)
+                            putExtra(Intent.EXTRA_STREAM, imgBitUri)
+                            type = "*/*"
                         }
-                        else{
-                            val shareText = "Song: ${savedPiece.songName}\n " +
+                        startActivity(ctx, Intent.createChooser(intent, null), null)
+                    }
+                    else{
+                        val shareText = "Song: ${savedPiece.songName}\n " +
                                 "Song Artist: ${savedPiece.songArtist}\n" +
                                 "Art name: ${savedPiece.artName}\n" +
                                 "Artist Name: ${savedPiece.artArtist}\n" +
                                 savedPiece.imgUrl
-                            val intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_TEXT, shareText)
-                                type = "text/plain"
-                            }
-                            startActivity(ctx, Intent.createChooser(intent, null), null)
+                        val intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_TEXT, shareText)
+                            type = "text/plain"
                         }
+                        startActivity(ctx, Intent.createChooser(intent, null), null)
                     }
+                }
                 catch (e: Exception) {
                     Log.e("Error", "$e")
                 }
