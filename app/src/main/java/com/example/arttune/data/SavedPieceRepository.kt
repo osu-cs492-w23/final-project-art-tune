@@ -8,4 +8,6 @@ class SavedPieceRepository(
     suspend fun deleteSavedPiece(savedPiece: SavedPiece) = dao.delete(savedPiece)
 
     fun getAllSavedPieces() = dao.getAllPieces()
+
+    fun getPieceByName(name: String) = dao.getPieceByName(name)
 }

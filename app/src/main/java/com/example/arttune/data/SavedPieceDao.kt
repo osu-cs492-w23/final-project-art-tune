@@ -13,4 +13,7 @@ interface SavedPieceDao {
 
     @Query("SELECT * FROM SavedPiece")
     fun getAllPieces(): Flow<List<SavedPiece>>
+
+    @Query("SELECT * FROM SavedPiece WHERE songName = :name LIMIT 1")
+    fun getPieceByName(name: String?): Flow<SavedPiece?>
 }
