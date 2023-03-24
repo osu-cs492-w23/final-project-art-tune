@@ -26,7 +26,6 @@
     <TextView
         android:id="@+id/tv_detail_track_title"
         style="?attr/textAppearanceBody1"
-        android:textStyle="bold"
         android:textSize="17sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
