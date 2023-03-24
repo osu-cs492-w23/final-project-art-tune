@@ -45,7 +45,7 @@ Date: 1896 <br/>
 Artist: Albert Pinkham Ryder
 
 **Taite Dodson**, *Creepin' by Metro Booming*<br/>
-<img src = "https://user-images.githubusercontent.com/29801241/227636257-a44a81fc-700a-479f-8c54-d4cd5c0567ed.jpg" width="600"><br/>
+<img src="https://user-images.githubusercontent.com/29801241/227636257-a44a81fc-700a-479f-8c54-d4cd5c0567ed.jpg" width="600"><br/>
 
 Title: Skull of a Skeleton with Burning Cigarette <br/>
 Date: 1885 <br/>
